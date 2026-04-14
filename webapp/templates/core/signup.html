@@ -1,0 +1,156 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% if plan %} – {{ plan.name }}{% endif %} | Guardian Agent{% endblock %}
+
+{% block content %}
+<section class="signup-section min-vh-100 d-flex align-items-center pt-5">
+    <div class="container py-5">
+        <div class="row justify-content-center g-4">
+            {% if plan %}
+            <div class="col-lg-5 d-flex flex-column justify-content-center" data-animate="fade-right">
+                <a href="{% url 'landing' %}#pricing" class="text-white-50 text-decoration-none small mb-4 d-inline-block" style="width:fit-content;">
+                    <i class="fas fa-chevron-left me-1"></i> Back to plans
+                </a>
+                <p class="text-white-50 text-uppercase small fw-semibold mb-2" style="letter-spacing:.08em;">Selected plan</p>
+                <h2 class="text-white fw-bold mb-1">{{ plan.name }}</h2>
+                <div class="mb-3">
+                    <span class="fs-1 fw-bold text-white">&euro;{{ plan.price_monthly }}</span>
+                    <span class="text-white-50 small"> / mo</span>
+                </div>
+                <p class="text-white-50 mb-4" style="max-width:360px;">{{ plan.description }}</p>
+                <ul class="list-unstyled mb-4">
+                    {% for feature in plan.feature_list %}
+                    <li class="mb-2 text-white d-flex align-items-start">
+                        <i class="fas fa-check text-success me-2 mt-1 small"></i> <span>{{ feature }}</span>
+                    </li>
+                    {% endfor %}
+                    <li class="mb-2 text-white d-flex align-items-start">
+                        <i class="fas fa-check text-success me-2 mt-1 small"></i>
+                        <span>{{ plan.max_devices }} device{{ plan.max_devices|pluralize }}</span>
+                    </li>
+                    <li class="mb-2 text-white d-flex align-items-start">
+                        <i class="fas fa-check text-success me-2 mt-1 small"></i>
+                        <span>{{ plan.max_children }} child{{ plan.max_children|pluralize:"ren" }} profile{{ plan.max_children|pluralize }}</span>
+                    </li>
+                </ul>
+                <p class="text-white-50 small mb-0"><i class="fas fa-undo me-1"></i> 30-day refund policy &middot; cancel anytime</p>
+            </div>
+            {% endif %}
+
+            <div class="{% if plan %}col-lg-6{% else %}col-lg-5{% endif %}">
+                <div class="signup-form-card p-4 p-md-5 rounded-4 shadow" data-animate="fade-left">
+                    {% if not plan %}
+                    <div class="text-center mb-3">
+                        <img src="{% static 'images/logo.png' %}" alt="Guardian Agent" height="44" class="mb-2">
+                    </div>
+                    {% endif %}
+                    <h5 class="fw-bold mb-1">Create an account</h5>
+                    <p class="text-muted small mb-4">Takes about a minute.</p>
+
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger small py-2">{{ form.non_field_errors.0 }}</div>
+                    {% endif %}
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <label for="id_first_name" class="form-label small mb-1">First name</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}<div class="text-danger small mt-1">{{ form.first_name.errors.0 }}</div>{% endif %}
+                            </div>
+                            <div class="col-6">
+                                <label for="id_last_name" class="form-label small mb-1">Last name</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}<div class="text-danger small mt-1">{{ form.last_name.errors.0 }}</div>{% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label small mb-1">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_phone_number" class="form-label small mb-1">Phone number</label>
+                            {{ form.phone_number }}
+                            {% if form.phone_number.errors %}<div class="text-danger small mt-1">{{ form.phone_number.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <label for="id_password" class="form-label small mb-1">Password</label>
+                                {{ form.password }}
+                                {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>{% endif %}
+                            </div>
+                            <div class="col-6">
+                                <label for="id_password_confirm" class="form-label small mb-1">Confirm password</label>
+                                {{ form.password_confirm }}
+                                {% if form.password_confirm.errors %}<div class="text-danger small mt-1">{{ form.password_confirm.errors.0 }}</div>{% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_children_count" class="form-label small mb-1">How many children will you monitor?</label>
+                            {{ form.children_count }}
+                            {% if form.children_count.errors %}<div class="text-danger small mt-1">{{ form.children_count.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        {% if plan %}
+                        <hr class="my-3">
+                        <p class="fw-semibold small mb-3">Payment method</p>
+
+                        <div class="mb-3">
+                            <label class="form-label small mb-1">Card number</label>
+                            <div class="input-group">
+                                <input type="text" name="_card" class="form-control" placeholder="1234 5678 9012 3456"
+                                       maxlength="19" autocomplete="off">
+                                <span class="input-group-text px-2">
+                                    <i class="fab fa-cc-visa text-muted me-1"></i>
+                                    <i class="fab fa-cc-mastercard text-muted"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-4">
+                                <label class="form-label small mb-1">Expiry</label>
+                                <input type="text" name="_exp" class="form-control" placeholder="MM/YY"
+                                       maxlength="5" autocomplete="off">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small mb-1">CVC</label>
+                                <input type="text" name="_cvc" class="form-control" placeholder="123"
+                                       maxlength="4" autocomplete="off">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small mb-1">ZIP / Postal</label>
+                                <input type="text" name="_zip" class="form-control" placeholder="10001"
+                                       maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 mt-2">
+                            {% if plan %}Start subscription &ndash; &euro;{{ plan.price_monthly }}/mo{% else %}Create account{% endif %}
+                        </button>
+
+                        {% if plan %}
+                        <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
+                            <i class="fas fa-lock text-muted" style="font-size:.65rem;"></i>
+                            <span class="text-muted" style="font-size:.75rem;">Encrypted &middot; Cancel anytime</span>
+                        </div>
+                        {% endif %}
+
+                        <p class="text-muted text-center small mt-3 mb-0">
+                            Already have an account? <a href="{% url 'signin' %}" class="text-decoration-none">Sign in</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

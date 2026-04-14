@@ -1,0 +1,47 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+packages/
+*.nupkg
+*.snupkg
+*.env
+# Build output
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.sln.docstates
+
+# WiX installer output
+client/installer/bin/
+client/installer/obj/
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Misc
+*.log
+
+CLAUDE.md

@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: guardian_db
+      POSTGRES_USER: guardian_user
+      POSTGRES_PASSWORD: guardian_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U guardian_user -d guardian_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    command: ["sh", "/app/entrypoint.sh"]
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://guardian_user:guardian_pass@db:5432/guardian_db
+      DJANGO_SECRET_KEY: change-me-in-production-to-a-real-secret-key
+      DJANGO_DEBUG: "true"
+
+volumes:
+  postgres_data:
