@@ -14,7 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY webapp/ ./webapp/
 COPY entrypoint.sh /app/entrypoint.sh
-COPY GuardianAgent-Photoroom.png ./webapp/static/images/logo.png
 
 WORKDIR /app/webapp
 

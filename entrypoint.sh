@@ -1,8 +1,11 @@
 ﻿#!/bin/sh
 set -e
 
-echo "Running migrations..."
+echo "Running migrations..." joris@whale-academy.com
 python manage.py migrate --noinput
+
+echo "Collecting static files..."
+python manage.py collectstatic --noinput
 
 echo "Creating default admin user..."
 python manage.py shell -c "
@@ -20,4 +23,4 @@ for u in User.objects.all():
 "
 
 echo "Starting Gunicorn..."
-exec gunicorn guardian_project.wsgi:application --bind 0.0.0.0:${PORT:-8000}
+exec gunicorn guardian_project.wsgi:application --bind 0.0.0.0:${PORT:-8000} --reload

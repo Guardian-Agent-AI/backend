@@ -18,6 +18,8 @@ services:
     command: ["sh", "/app/entrypoint.sh"]
     ports:
       - "8000:8000"
+    volumes:
+      - ./webapp:/app/webapp
     depends_on:
       db:
         condition: service_healthy

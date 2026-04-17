@@ -54,45 +54,12 @@
     </div>
 </section>
 
-<!-- ===================== SOCIAL PROOF BAR ===================== -->
-<section class="py-4 bg-white">
-    <div class="container">
-        <div class="row text-center g-4">
-            <div class="col-6 col-md-3" data-animate="fade-up">
-                <div class="counter-box">
-                    <h3 class="fw-bold text-primary counter" data-target="10000">0</h3>
-                    <small class="text-muted">Families Protected</small>
-                </div>
-            </div>
-            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="100">
-                <div class="counter-box">
-                    <h3 class="fw-bold text-primary counter" data-target="500000">0</h3>
-                    <small class="text-muted">Threats Blocked</small>
-                </div>
-            </div>
-            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="200">
-                <div class="counter-box">
-                    <h3 class="fw-bold text-primary counter" data-target="50">0</h3>
-                    <small class="text-muted">Games Supported</small>
-                </div>
-            </div>
-            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="300">
-                <div class="counter-box">
-                    <h3 class="fw-bold text-primary"><i class="fas fa-star text-warning"></i> 4.9</h3>
-                    <small class="text-muted">Parent Rating</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- ===================== BY THE NUMBERS ===================== -->
 <section class="py-6 bg-dark-gradient" id="by-the-numbers">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-danger bg-opacity-75 text-white px-3 py-2 rounded-pill mb-3">
-                <i class="fas fa-exclamation-triangle me-1"></i> The Problem
-            </span>
             <h2 class="display-5 fw-bold text-white mb-3">
                 Gaming is how kids <span class="text-gradient">connect</span> today.<br>
                 <span style="color:#ef4444;">But the risks are growing.</span>
@@ -148,22 +115,22 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(255,255,255,0.05);">
                     <div class="flex-shrink-0 rounded-circle p-3" style="background:rgba(249,115,22,0.15);color:#f97316;">
-                        <i class="fas fa-comment-slash fa-lg"></i>
+                        <i class="fas fa-mask fa-lg"></i>
                     </div>
                     <div>
-                        <strong class="text-white small">Cyberbullying</strong>
-                        <p class="text-white-50 small mb-0">Toxic voice and text harassment</p>
+                        <strong class="text-white small">Identity Deception</strong>
+                        <p class="text-white-50 small mb-0">Strangers using fake profiles to build trust with minors</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(255,255,255,0.05);">
                     <div class="flex-shrink-0 rounded-circle p-3" style="background:rgba(72,202,228,0.15);color:var(--ga-primary-light);">
-                        <i class="fas fa-eye-slash fa-lg"></i>
+                        <i class="fas fa-comments fa-lg"></i>
                     </div>
                     <div>
-                        <strong class="text-white small">Hidden from Parents</strong>
-                        <p class="text-white-50 small mb-0">No visibility into in-game conversations</p>
+                        <strong class="text-white small">Manipulation Tactics</strong>
+                        <p class="text-white-50 small mb-0">Predators isolating children through private messages</p>
                     </div>
                 </div>
             </div>
@@ -172,10 +139,28 @@
 </section>
 
 <!-- ===================== FEATURES ===================== -->
-<section class="py-6 bg-white" id="features">
-    <div class="container">
+<section class="py-6" id="features">
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="gradient-svg">
+            <defs>
+                <filter id="goo2">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container" style="filter: url(#goo2) blur(40px);">
+            <div class="g1" style="animation-duration:15s;"></div>
+            <div class="g2" style="animation-duration:11s;"></div>
+            <div class="g3" style="animation-duration:13s;"></div>
+            <div class="g4" style="animation-duration:17s;"></div>
+            <div class="g5" style="animation-duration:19s;"></div>
+            <div class="interactive" id="interactiveBubbleFeatures"></div>
+        </div>
+    </div>
+    <div class="container position-relative" style="z-index:2;">
         <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">Features</span>
             <h2 class="display-5 fw-bold">How Guardian Agent <span class="text-gradient">Keeps Kids Safe</span></h2>
             <p class="text-muted mx-auto" style="max-width:600px;">
                 AI-powered protection that runs silently in the background &mdash; no disruption to gameplay, full peace of mind.
@@ -261,14 +246,38 @@
                 </div>
             </div>
         </div>
+        <!-- Stats bar -->
+        <div class="row text-center g-4 mt-5">
+            <div class="col-6 col-md-3" data-animate="fade-up">
+                <div class="counter-box">
+                    <h3 class="fw-bold text-primary">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.5);">Families Protected</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="100">
+                <div class="counter-box">
+                    <h3 class="fw-bold text-primary">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.5);">Threats Blocked</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="200">
+                <div class="counter-box">
+                    <h3 class="fw-bold text-primary">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.5);">Games Supported</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-animate="fade-up" data-delay="300">
+                <div class="counter-box">
+                    <h3 class="fw-bold text-primary"><i class="fas fa-star text-warning"></i> &mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.5);">Parent Rating</small>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-
-<!-- ===================== HOW IT WORKS ===================== -->
 <section class="py-6 bg-dark-gradient" id="how-it-works">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-white bg-opacity-10 text-white px-3 py-2 rounded-pill mb-3">How It Works</span>
             <h2 class="display-5 fw-bold text-white">Up and Running in <span class="text-gradient">3 Minutes</span></h2>
             <p class="text-white-50 mx-auto" style="max-width:600px;">
                 Simple setup, powerful protection. No technical knowledge required.
@@ -319,7 +328,6 @@
 <section class="py-6 bg-white" id="pricing">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">Pricing</span>
             <h2 class="display-5 fw-bold">Choose Your <span class="text-gradient">Protection Plan</span></h2>
             <p class="text-muted mx-auto" style="max-width:600px;">
                 Flexible plans that grow with your family. All plans include full AI monitoring. Cancel anytime.
@@ -422,83 +430,10 @@
             </div>
             {% endfor %}
         </div>
-    </div>
-</section>
-
-<!-- ===================== TESTIMONIALS ===================== -->
-<section class="py-6 bg-light">
-    <div class="container">
-        <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">Testimonials</span>
-            <h2 class="display-5 fw-bold">Trusted by <span class="text-gradient">Parents</span></h2>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4" data-animate="fade-up">
-                <div class="testimonial-card p-4 rounded-4 bg-white shadow-sm h-100">
-                    <div class="d-flex mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="text-muted small fst-italic">
-                        "My son plays Fortnite and Roblox for hours. Guardian Agent caught a stranger
-                        trying to get his personal info within the first week. I can't imagine gaming without it now."
-                    </p>
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="testimonial-avatar bg-primary-subtle text-primary rounded-circle me-3">S</div>
-                        <div>
-                            <strong class="small">Sarah M.</strong>
-                            <p class="text-muted small mb-0">Parent of 2</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-animate="fade-up" data-delay="150">
-                <div class="testimonial-card p-4 rounded-4 bg-white shadow-sm h-100">
-                    <div class="d-flex mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="text-muted small fst-italic">
-                        "Finally something that actually works in real time. Other parental controls just block
-                        entire apps. Guardian Agent lets my kids play while keeping them safe."
-                    </p>
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="testimonial-avatar bg-success-subtle text-success rounded-circle me-3">D</div>
-                        <div>
-                            <strong class="small">David R.</strong>
-                            <p class="text-muted small mb-0">Parent of 3</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-animate="fade-up" data-delay="300">
-                <div class="testimonial-card p-4 rounded-4 bg-white shadow-sm h-100">
-                    <div class="d-flex mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="text-muted small fst-italic">
-                        "I love that it runs locally and respects my family's privacy. Setup took 2 minutes
-                        and my daughter doesn't even notice it running. Exactly what parents need."
-                    </p>
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="testimonial-avatar bg-warning-subtle text-warning rounded-circle me-3">L</div>
-                        <div>
-                            <strong class="small">Lisa T.</strong>
-                            <p class="text-muted small mb-0">Parent of 1</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Trusted by Parents -->
+        <div class="text-center mt-5 pt-4" data-animate="fade-up">
+            <h4 class="fw-bold">Trusted by <span class="text-gradient">Parents</span></h4>
+            <p class="text-muted small">Coming soon.</p>
         </div>
     </div>
 </section>
@@ -508,7 +443,6 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6" data-animate="fade-right">
-                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">Contact Us</span>
                 <h2 class="display-5 fw-bold">Have Questions? <span class="text-gradient">Let's Talk</span></h2>
                 <p class="text-muted">
                     Whether you want to learn more about Guardian Agent or need help getting started,
@@ -534,7 +468,7 @@
                 </div>
             </div>
             <div class="col-lg-6" data-animate="fade-left">
-                <div class="contact-form-card p-4 rounded-4 bg-light">
+                <div class="contact-form-card p-4 rounded-4 bg-white border">
                     <form method="post" action="{% url 'landing' %}#contact">
                         {% csrf_token %}
                         <input type="hidden" name="contact_submit" value="1">
@@ -559,18 +493,7 @@
         </div>
     </div>
 </section>
-
-<!-- ===================== CTA ===================== -->
-<section class="cta-section py-6">
-    <div class="container text-center" data-animate="fade-up">
-        <h2 class="display-5 fw-bold text-white mb-3">Ready to Protect Your Family?</h2>
-        <p class="text-white-50 mb-4 mx-auto" style="max-width:500px;">
-            Join thousands of parents who trust Guardian Agent to keep their children safe online.
-        </p>
-        <a href="#pricing" class="btn btn-light btn-lg px-5 shadow-lg">
-            Start Free Trial <i class="fas fa-arrow-right ms-2"></i>
-        </a>
-    </div>
-</section>
+})();
+</script>
 
 {% endblock %}
