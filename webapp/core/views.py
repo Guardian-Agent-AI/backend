@@ -8,8 +8,8 @@ from django.http import FileResponse, Http404
 from pathlib import Path
 from datetime import timedelta
 from django.utils import timezone
-from .models import Plan, UserProfile, Child, AlertEvent, CommunityThreatStat, CommunityPeakTimeStat
-from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm, ChangePasswordForm
+from .models import Plan, UserProfile, Child, AlertEvent, CommunityThreatStat, CommunityPeakTimeStat, Device
+from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm, ChangePasswordForm, ChildForm
 
 
 # ─── Landing ──────────────────────────────────────────────
@@ -249,9 +249,9 @@ def settings_view(request):
         'last_name': request.user.last_name,
         'email': request.user.email,
         'phone_number': profile.phone_number,
-        'children_count': profile.children_count,
     })
     password_form = ChangePasswordForm()
+    child_form = ChildForm()
 
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
@@ -265,7 +265,6 @@ def settings_view(request):
                 request.user.username = account_form.cleaned_data['email']
                 request.user.save()
                 profile.phone_number = account_form.cleaned_data['phone_number']
-                profile.children_count = account_form.cleaned_data['children_count']
                 profile.save()
                 account_success = True
 
@@ -280,11 +279,33 @@ def settings_view(request):
                     login(request, request.user)
                     password_success = True
 
+        elif form_type == 'add_child':
+            child_form = ChildForm(request.POST)
+            if child_form.is_valid():
+                child = child_form.save(commit=False)
+                child.parent = profile
+                child.save()
+                messages.success(request, f'{child.name} has been added.')
+                return redirect('settings')
+
+        elif form_type == 'remove_child':
+            child_id = request.POST.get('child_id')
+            if child_id:
+                Child.objects.filter(id=child_id, parent=profile).delete()
+                messages.success(request, 'Child removed.')
+                return redirect('settings')
+
+    children = profile.children.order_by('name')
+    devices = profile.devices.order_by('-last_seen', 'name')
+
     return render(request, 'core/settings.html', {
         'profile': profile,
         'plans': plans,
         'account_form': account_form,
         'password_form': password_form,
+        'child_form': child_form,
+        'children': children,
+        'devices': devices,
         'account_success': account_success,
         'password_success': password_success,
     })

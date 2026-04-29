@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import ContactMessage
+from .models import ContactMessage, Child
 
 
 class RegistrationForm(forms.Form):
@@ -62,9 +62,6 @@ class AccountSettingsForm(forms.Form):
     phone_number = forms.CharField(max_length=17, widget=forms.TextInput(attrs={
         'class': 'form-control',
     }))
-    children_count = forms.IntegerField(min_value=1, max_value=10, widget=forms.NumberInput(attrs={
-        'class': 'form-control', 'min': 1, 'max': 10,
-    }))
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -115,5 +112,23 @@ class ContactForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 4,
                 'placeholder': 'How can we help?',
+            }),
+        }
+
+
+class ChildForm(forms.ModelForm):
+    class Meta:
+        model = Child
+        fields = ['name', 'age']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Child\'s name',
+            }),
+            'age': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Age',
+                'min': 1,
+                'max': 18,
             }),
         }

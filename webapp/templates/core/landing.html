@@ -354,10 +354,6 @@
                             <i class="fas fa-check-circle text-success me-2"></i>
                             <span class="small">Up to {{ plan.max_devices }} device{{ plan.max_devices|pluralize }}</span>
                         </li>
-                        <li class="mb-2">
-                            <i class="fas fa-check-circle text-success me-2"></i>
-                            <span class="small">Up to {{ plan.max_children }} child{{ plan.max_children|pluralize:"ren" }} profiles</span>
-                        </li>
                     </ul>
                     {% if user.is_authenticated %}
                     <a href="{% url 'choose_plan' plan.id %}"
@@ -376,54 +372,57 @@
             <!-- Fallback plans when no DB plans exist yet -->
             <div class="col-md-6 col-lg-4" data-animate="fade-up">
                 <div class="pricing-card h-100 p-4 rounded-4">
-                    <h5 class="fw-bold">Starter</h5>
-                    <p class="text-muted small">Essential protection for one child</p>
+                    <h5 class="fw-bold">Free</h5>
+                    <p class="text-muted small">Try Guardian Agent at no cost</p>
                     <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;25.00</span>
+                        <span class="display-4 fw-900">&euro;0</span>
                         <span class="text-muted">/month</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Real-time voice monitoring</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 hour monitoring per day</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
                         <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Instant alerts</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Dashboard alerts only</span></li>
                         <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 device</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 child profile</span></li>
                     </ul>
                     <span class="btn btn-outline-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="100">
                 <div class="pricing-card h-100 p-4 rounded-4 pricing-featured">
-                    <h5 class="fw-bold">Family</h5>
-                    <p class="text-muted small">Full protection for the whole family</p>
+                    <h5 class="fw-bold">Basic</h5>
+                    <p class="text-muted small">Full protection for one device</p>
                     <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;50.00</span>
+                        <span class="display-4 fw-900">&euro;5</span>
                         <span class="text-muted">/month</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Everything in Starter</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">AI-powered context analysis</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Custom safety rules</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">3 devices</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">4 child profiles</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited monitoring</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Alerts to 1 phone number</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 device</span></li>
                     </ul>
                     <span class="btn btn-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="200">
                 <div class="pricing-card h-100 p-4 rounded-4">
-                    <h5 class="fw-bold">Ultra</h5>
-                    <p class="text-muted small">Maximum protection, unlimited access</p>
+                    <h5 class="fw-bold">Family</h5>
+                    <p class="text-muted small">Protect the whole family</p>
                     <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;100.00</span>
+                        <span class="display-4 fw-900">&euro;7.50</span>
                         <span class="text-muted">/month</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Everything in Family</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Priority support</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Weekly safety reports</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited devices</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited children</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited monitoring</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Alerts to 2 phone numbers</span></li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Up to 4 devices</span></li>
                     </ul>
                     <span class="btn btn-outline-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>

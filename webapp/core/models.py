@@ -15,7 +15,6 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     price_monthly = models.DecimalField(max_digits=8, decimal_places=2)
     max_devices = models.PositiveIntegerField(default=1)
-    max_children = models.PositiveIntegerField(default=1)
     description = models.TextField(blank=True)
     features = models.TextField(blank=True, help_text="One feature per line")
     is_active = models.BooleanField(default=True)
@@ -54,6 +53,7 @@ class Child(models.Model):
 class GameSession(models.Model):
     """A single detected gaming session for a child."""
     child = models.ForeignKey(Child, on_delete=models.CASCADE, related_name='sessions')
+    device = models.ForeignKey('Device', on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions')
     game_name = models.CharField(max_length=200)
     started_at = models.DateTimeField()
     ended_at = models.DateTimeField(null=True, blank=True)
@@ -162,6 +162,46 @@ class CommunityPeakTimeStat(models.Model):
     def __str__(self):
         return f"{self.label}: {self.count}"
 
+class Device(models.Model):
+    """A device (PC, console, etc.) with Guardian Agent installed."""
+    DEVICE_TYPES = [
+        ('pc', 'PC'),
+        ('console', 'Console'),
+        ('mobile', 'Mobile'),
+        ('other', 'Other'),
+    ]
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='devices')
+    child = models.ForeignKey(Child, on_delete=models.SET_NULL, null=True, blank=True, related_name='devices')
+    name = models.CharField(max_length=100)
+    device_type = models.CharField(max_length=20, choices=DEVICE_TYPES, default='pc')
+    is_active = models.BooleanField(default=True)
+    last_seen = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.get_device_type_display()})"
+
+
+class ChatMessage(models.Model):
+    """A chat message captured on a monitored device."""
+    MESSAGE_TYPES = [
+        ('voice', 'Voice'),
+        ('text', 'Text'),
+    ]
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, related_name='messages')
+    game_name = models.CharField(max_length=200)
+    speaker = models.CharField(max_length=200, blank=True)
+    content = models.TextField()
+    message_type = models.CharField(max_length=20, choices=MESSAGE_TYPES, default='text')
+    is_flagged = models.BooleanField(default=False)
+    alert = models.ForeignKey(AlertEvent, on_delete=models.SET_NULL, null=True, blank=True, related_name='messages')
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"{self.speaker}: {self.content[:50]} ({self.game_name})"
 
 class ContactMessage(models.Model):
     """Contact form submission from landing page."""
