@@ -4,41 +4,47 @@
 {% block title %}Sign In | Guardian Agent{% endblock %}
 
 {% block content %}
-<section class="signup-section min-vh-100 d-flex align-items-center pt-5">
-    <div class="container py-5">
+<section class="auth-section pt-5">
+    <div class="auth-bg-glow">
+        <div class="auth-bg-grid"></div>
+        <div class="auth-glow-1"></div>
+        <div class="auth-glow-2"></div>
+    </div>
+
+    <div class="container position-relative py-5" style="z-index:2;">
         <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="signup-form-card p-5 rounded-4 shadow-lg" data-animate="fade-up">
-                    <div class="text-center mb-3">
-                        <img src="{% static 'images/logo.png' %}" alt="Guardian Agent" height="44" class="mb-2">
+            <div class="col-lg-5 col-md-7" data-animate="fade-up">
+                <div class="auth-card p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'images/logo.png' %}" alt="Guardian Agent" height="48" class="mb-3">
+                        <h4 class="fw-bold text-white mb-1">Welcome back</h4>
+                        <p class="text-muted small mb-0">Sign in to your Guardian Agent account</p>
                     </div>
-                    <h5 class="fw-bold mb-1">Sign in</h5>
-                    <p class="text-muted small mb-4">Welcome back to Guardian Agent.</p>
 
                     {% if form.non_field_errors %}
-                    <div class="alert alert-danger small py-2">{{ form.non_field_errors.0 }}</div>
+                    <div class="alert alert-danger small py-2 mb-3">{{ form.non_field_errors.0 }}</div>
                     {% endif %}
 
                     <form method="post" novalidate>
                         {% csrf_token %}
-
                         <div class="mb-3">
-                            <label for="id_email" class="form-label small mb-1">Email</label>
+                            <label for="id_email" class="form-label">Email</label>
                             {{ form.email }}
-                            {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>{% endif %}
+                            {% if form.email.errors %}<div class="text-danger small mt-1" style="font-size:0.8rem;">{{ form.email.errors.0 }}</div>{% endif %}
                         </div>
-
-                        <div class="mb-3">
-                            <label for="id_password" class="form-label small mb-1">Password</label>
+                        <div class="mb-4">
+                            <label for="id_password" class="form-label">Password</label>
                             {{ form.password }}
-                            {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>{% endif %}
+                            {% if form.password.errors %}<div class="text-danger small mt-1" style="font-size:0.8rem;">{{ form.password.errors.0 }}</div>{% endif %}
                         </div>
-
-                        <button type="submit" class="btn btn-primary w-100 py-2 mt-1">Sign in</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Sign in</button>
                     </form>
 
-                    <p class="text-muted text-center small mt-3 mb-0">
-                        Don't have an account? <a href="{% url 'signup_no_plan' %}" class="text-decoration-none">Sign up</a>
+                    <div style="height:1px;background:var(--ga-border);margin:1.5rem 0;"></div>
+
+                    <p class="text-center small mb-0" style="color:rgba(255,255,255,0.4);">
+                        Don't have an account?
+                        <a href="{% url 'signup_no_plan' %}" class="fw-medium" style="color:var(--ga-primary);">Create one free</a>
                     </p>
                 </div>
             </div>

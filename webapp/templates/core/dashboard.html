@@ -3,116 +3,20 @@
 
 {% block title %}Dashboard | Guardian Agent{% endblock %}
 
-{% block extra_css %}
-<style>
-  .dash-wrap {
-    background: var(--ga-dark);
-    min-height: 100vh;
-    padding-top: 80px; /* navbar height */
-  }
-
-  /* ── stat cards ── */
-  .stat-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--ga-radius);
-    padding: 1.4rem 1.6rem;
-    transition: transform var(--ga-transition), box-shadow var(--ga-transition);
-  }
-  .stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,180,216,0.12);
-  }
-  .stat-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-  }
-  .stat-value { font-size: 2rem; font-weight: 800; line-height: 1.1; }
-  .stat-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-
-  /* ── section cards ── */
-  .dash-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--ga-radius);
-    overflow: hidden;
-  }
-  .dash-card-header {
-    padding: 1rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .dash-card-body { padding: 0; }
-
-  /* ── alert row ── */
-  .alert-row {
-    padding: 0.9rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: background var(--ga-transition);
-  }
-  .alert-row:last-child { border-bottom: none; }
-  .alert-row:hover { background: rgba(255,255,255,0.03); }
-  .alert-sms { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.4; }
-
-  /* ── game row ── */
-  .game-row {
-    padding: 0.85rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    display: flex; align-items: center; gap: 1rem;
-    transition: background var(--ga-transition);
-  }
-  .game-row:last-child { border-bottom: none; }
-  .game-row:hover { background: rgba(255,255,255,0.03); }
-  .game-icon {
-    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-    background: linear-gradient(135deg, var(--ga-primary-dark), var(--ga-primary-darker));
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 0.9rem;
-  }
-
-  /* ── risk bar ── */
-  .risk-bar-wrap { background: rgba(255,255,255,0.08); border-radius: 99px; height: 6px; }
-  .risk-bar { height: 6px; border-radius: 99px; transition: width 0.6s ease; }
-
-  /* ── child selector ── */
-  .child-select {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #fff;
-    border-radius: 10px;
-    font-size: 0.88rem;
-    padding: 0.4rem 0.9rem;
-    cursor: pointer;
-  }
-  .child-select:focus { outline: none; border-color: var(--ga-primary); box-shadow: 0 0 0 3px rgba(0,180,216,0.2); }
-  .child-select option { background: #121D33; }
-
-  /* ── empty state ── */
-  .empty-state { padding: 3rem 1.5rem; text-align: center; color: rgba(255,255,255,0.35); }
-  .empty-state i { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
-
-  /* ── badge tweaks ── */
-  .badge { font-weight: 500; font-size: 0.72rem; letter-spacing: 0.03em; }
-  .bg-orange { background-color: #f97316 !important; }
-</style>
-{% endblock %}
-
 {% block content %}
 <div class="dash-wrap">
   <div class="container-lg py-4 px-3 px-lg-4">
 
-    {# ── Header row ── #}
-    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <!-- Header row -->
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-5">
       <div>
-        <h4 class="fw-bold text-white mb-0">Dashboard</h4>
-        <span class="text-white-50 small">Welcome back, {{ request.user.first_name }}</span>
+        <h4 class="fw-bold text-white mb-1" style="font-size:1.4rem;letter-spacing:-0.02em;">Dashboard</h4>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.85rem;">Welcome back{% if request.user.first_name %}, <span style="color:rgba(255,255,255,0.7);">{{ request.user.first_name }}</span>{% endif %}</span>
       </div>
 
       {% if children|length > 1 %}
       <form method="get" class="d-flex align-items-center gap-2">
-        <i class="fas fa-child text-white-50 small"></i>
+        <i class="fas fa-child" style="color:rgba(255,255,255,0.35);font-size:0.8rem;"></i>
         <select name="child" class="child-select" onchange="this.form.submit()">
           {% for child in children %}
           <option value="{{ child.id }}" {% if child == selected_child %}selected{% endif %}>
@@ -122,33 +26,37 @@
         </select>
       </form>
       {% elif selected_child %}
-      <span class="text-white-50 small">
+      <span style="color:rgba(255,255,255,0.4);font-size:0.85rem;">
         <i class="fas fa-child me-1"></i>{{ selected_child.name }}{% if selected_child.age %}, age {{ selected_child.age }}{% endif %}
       </span>
       {% endif %}
     </div>
 
     {% if not selected_child %}
-    {# ── No children set up yet ── #}
-    <div class="dash-card text-center py-5">
-      <i class="fas fa-desktop fa-3x mb-3" style="color: var(--ga-primary);"></i>
+    <!-- No children state -->
+    <div class="dash-card text-center py-5 px-4">
+      <div class="mb-4" style="width:64px;height:64px;border-radius:16px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;margin:auto;">
+        <i class="fas fa-desktop" style="color:var(--ga-primary);font-size:1.4rem;"></i>
+      </div>
       <h5 class="text-white fw-semibold mb-2">No children connected yet</h5>
-      <p class="text-white-50 mb-3" style="max-width:380px;margin:auto;">
+      <p style="color:rgba(255,255,255,0.4);max-width:360px;margin:auto;" class="small mb-4">
         Install the Guardian Agent desktop app on your child's PC and it will start appearing here automatically.
       </p>
-      <a href="{% url 'install' %}" class="btn btn-primary btn-sm px-4">Download the App</a>
+      <a href="{% url 'install' %}" class="btn btn-primary btn-sm px-4">
+        <i class="fas fa-download me-2" style="font-size:0.75rem;"></i>Download the App
+      </a>
     </div>
 
     {% else %}
 
-    {# ── Stat cards ── #}
+    <!-- Stat cards -->
     <div class="row g-3 mb-4">
       <div class="col-6 col-lg-3">
         <div class="stat-card">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="stat-label text-white-50">Alerts (24 h)</span>
-            <span class="stat-icon" style="background:rgba(239,68,68,0.15);color:#ef4444;">
-              <i class="fas fa-bell"></i>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="stat-label text-muted">Alerts (24h)</span>
+            <span class="stat-icon" style="background:rgba(248,113,113,0.1);color:#f87171;">
+              <i class="fas fa-bell" style="font-size:0.85rem;"></i>
             </span>
           </div>
           <div class="stat-value text-white">{{ alerts_24h }}</div>
@@ -156,10 +64,10 @@
       </div>
       <div class="col-6 col-lg-3">
         <div class="stat-card">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="stat-label text-white-50">Alerts (7 days)</span>
-            <span class="stat-icon" style="background:rgba(249,115,22,0.15);color:#f97316;">
-              <i class="fas fa-shield-alt"></i>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="stat-label text-muted">Alerts (7 days)</span>
+            <span class="stat-icon" style="background:rgba(251,146,60,0.1);color:#fb923c;">
+              <i class="fas fa-shield-halved" style="font-size:0.85rem;"></i>
             </span>
           </div>
           <div class="stat-value text-white">{{ alerts_7d }}</div>
@@ -167,10 +75,10 @@
       </div>
       <div class="col-6 col-lg-3">
         <div class="stat-card">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="stat-label text-white-50">Sessions (7 days)</span>
-            <span class="stat-icon" style="background:rgba(0,180,216,0.15);color:var(--ga-primary);">
-              <i class="fas fa-gamepad"></i>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="stat-label text-muted">Sessions (7 days)</span>
+            <span class="stat-icon" style="background:rgba(56,189,248,0.1);color:var(--ga-primary);">
+              <i class="fas fa-gamepad" style="font-size:0.85rem;"></i>
             </span>
           </div>
           <div class="stat-value text-white">{{ sessions_7d }}</div>
@@ -178,36 +86,34 @@
       </div>
       <div class="col-6 col-lg-3">
         <div class="stat-card">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="stat-label text-white-50">Time played (7 days)</span>
-            <span class="stat-icon" style="background:rgba(72,202,228,0.15);color:var(--ga-primary-light);">
-              <i class="fas fa-clock"></i>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="stat-label text-muted">Playtime (7 days)</span>
+            <span class="stat-icon" style="background:rgba(125,211,252,0.1);color:var(--ga-primary-light);">
+              <i class="fas fa-clock" style="font-size:0.85rem;"></i>
             </span>
           </div>
           <div class="stat-value text-white">
             {% if playtime_7d >= 60 %}
-              {{ playtime_7d|divisibleby:60|yesno:",," }}
-              {# format as Xh Ym #}
-              {% widthratio playtime_7d 60 1 %}<span class="fs-5 fw-600 text-white-50">h</span>
+              {% widthratio playtime_7d 60 1 %}<span class="fs-5 fw-normal text-muted">h</span>
             {% else %}
-              {{ playtime_7d }}<span class="fs-5 fw-600 text-white-50">m</span>
+              {{ playtime_7d }}<span class="fs-5 fw-normal text-muted">m</span>
             {% endif %}
           </div>
         </div>
       </div>
     </div>
 
-    {# ── Main two-column ── #}
+    <!-- Main two columns -->
     <div class="row g-4 mb-4">
 
-      {# Recent alerts #}
+      <!-- Recent alerts -->
       <div class="col-lg-7">
         <div class="dash-card h-100">
           <div class="dash-card-header">
-            <span class="fw-semibold text-white">
-              <i class="fas fa-exclamation-triangle me-2" style="color:#ef4444;"></i>Recent Alerts
+            <span class="fw-semibold text-white small d-flex align-items-center gap-2">
+              <i class="fas fa-exclamation-triangle" style="color:#f87171;font-size:0.8rem;"></i>Recent Alerts
             </span>
-            <span class="badge bg-secondary">Last 7 days</span>
+            <span class="badge" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);font-size:0.68rem;">Last 7 days</span>
           </div>
           <div class="dash-card-body">
             {% if recent_alerts %}
@@ -218,11 +124,11 @@
                     <span class="badge bg-{{ alert.badge_class }}">
                       <i class="fas {{ alert.icon }} me-1"></i>{{ alert.display_category }}
                     </span>
-                    <span class="badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">
+                    <span class="badge" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">
                       <i class="fas fa-gamepad me-1"></i>{{ alert.game_name }}
                     </span>
                   </div>
-                  <span class="text-white-50 small flex-shrink-0">
+                  <span class="flex-shrink-0 small" style="color:rgba(255,255,255,0.3);font-size:0.75rem;white-space:nowrap;">
                     {% if alert.timestamp_str %}{{ alert.timestamp_str }}{% else %}{{ alert.timestamp|timesince }} ago{% endif %}
                   </span>
                 </div>
@@ -231,22 +137,22 @@
               {% endfor %}
             {% else %}
               <div class="empty-state">
-                <i class="fas fa-shield-alt"></i>
-                No alerts in the last 7 days
+                <i class="fas fa-shield-halved" style="color:var(--ga-success);"></i>
+                <div class="mt-2 small" style="color:var(--ga-success);opacity:0.7;">No alerts in the last 7 days</div>
               </div>
             {% endif %}
           </div>
         </div>
       </div>
 
-      {# Games this week #}
+      <!-- Games this week -->
       <div class="col-lg-5">
         <div class="dash-card h-100">
           <div class="dash-card-header">
-            <span class="fw-semibold text-white">
-              <i class="fas fa-gamepad me-2" style="color:var(--ga-primary);"></i>Games This Week
+            <span class="fw-semibold text-white small d-flex align-items-center gap-2">
+              <i class="fas fa-gamepad" style="color:var(--ga-primary);font-size:0.8rem;"></i>Games This Week
             </span>
-            <span class="badge bg-secondary">Last 7 days</span>
+            <span class="badge" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);font-size:0.68rem;">Last 7 days</span>
           </div>
           <div class="dash-card-body">
             {% if recent_games %}
@@ -256,16 +162,14 @@
                   <i class="fas fa-gamepad"></i>
                 </div>
                 <div class="flex-grow-1 overflow-hidden">
-                  <div class="text-white fw-semibold text-truncate small">{{ game.name }}</div>
-                  <div class="text-white-50" style="font-size:0.75rem;">
+                  <div class="text-white fw-semibold text-truncate" style="font-size:0.85rem;">{{ game.name }}</div>
+                  <div style="color:rgba(255,255,255,0.3);font-size:0.72rem;">
                     Last played {% if game.last_played_str %}{{ game.last_played_str }}{% else %}{{ game.last_played|timesince }} ago{% endif %}
                   </div>
                 </div>
                 <div class="text-end flex-shrink-0">
                   {% if game.total_minutes >= 60 %}
-                    <span class="text-white small fw-semibold">
-                      {% widthratio game.total_minutes 60 1 %}h
-                    </span>
+                    <span class="text-white small fw-semibold">{% widthratio game.total_minutes 60 1 %}h</span>
                   {% else %}
                     <span class="text-white small fw-semibold">{{ game.total_minutes }}m</span>
                   {% endif %}
@@ -283,17 +187,15 @@
       </div>
     </div>
 
-    {# ── Playtime Breakdown ── #}
+    <!-- Playtime breakdown -->
     <div class="row g-4 mb-5">
-
-      {# Time per game #}
       <div class="col-lg-8">
         <div class="dash-card h-100">
           <div class="dash-card-header">
-            <span class="fw-semibold text-white">
-              <i class="fas fa-hourglass-half me-2" style="color:var(--ga-primary);"></i>Time Per Game This Week
+            <span class="fw-semibold text-white small d-flex align-items-center gap-2">
+              <i class="fas fa-hourglass-half" style="color:var(--ga-primary);font-size:0.8rem;"></i>Time Per Game This Week
             </span>
-            <span class="badge bg-secondary">Last 7 days</span>
+            <span class="badge" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);font-size:0.68rem;">Last 7 days</span>
           </div>
           <div class="dash-card-body p-3">
             {% if recent_games %}
@@ -301,13 +203,13 @@
               <div class="mb-3 px-1">
                 <div class="d-flex align-items-center justify-content-between mb-1">
                   <span class="text-white small fw-semibold">{{ game.name }}</span>
-                  <span class="text-white-50" style="font-size:0.78rem;">
+                  <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">
                     {% if game.total_minutes >= 60 %}{% widthratio game.total_minutes 60 1 %}h{% else %}{{ game.total_minutes }}m{% endif %}
                   </span>
                 </div>
                 <div class="risk-bar-wrap">
                   <div class="risk-bar" style="width:{% widthratio game.total_minutes max_game_minutes 100 %}%;
-                    background: linear-gradient(90deg, var(--ga-primary-dark), var(--ga-primary));"></div>
+                    background:linear-gradient(90deg,var(--ga-primary-darker),var(--ga-primary));"></div>
                 </div>
               </div>
               {% endfor %}
@@ -321,45 +223,43 @@
         </div>
       </div>
 
-      {# Alert type breakdown #}
       <div class="col-lg-4">
         <div class="dash-card h-100">
           <div class="dash-card-header">
-            <span class="fw-semibold text-white">
-              <i class="fas fa-exclamation-circle me-2" style="color:#ef4444;"></i>Alert Types
+            <span class="fw-semibold text-white small d-flex align-items-center gap-2">
+              <i class="fas fa-exclamation-circle" style="color:#f87171;font-size:0.8rem;"></i>Alert Types
             </span>
-            <span class="badge bg-secondary">Last 7 days</span>
+            <span class="badge" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);font-size:0.68rem;">Last 7 days</span>
           </div>
           <div class="dash-card-body p-3">
             {% if recent_alerts %}
               {% for alert in recent_alerts %}
               <div class="d-flex align-items-center gap-3 mb-3 px-1">
-                <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;
-                  background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
-                  <i class="fas {{ alert.icon }} text-white-50" style="font-size:0.85rem;"></i>
+                <div style="width:34px;height:34px;border-radius:9px;flex-shrink:0;
+                  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+                  <i class="fas {{ alert.icon }}" style="color:rgba(255,255,255,0.4);font-size:0.8rem;"></i>
                 </div>
                 <div class="flex-grow-1 overflow-hidden">
-                  <div class="text-white small fw-semibold text-truncate">{{ alert.display_category }}</div>
-                  <div class="text-white-50" style="font-size:0.72rem;">
+                  <div class="text-white small fw-semibold text-truncate" style="font-size:0.82rem;">{{ alert.display_category }}</div>
+                  <div style="color:rgba(255,255,255,0.3);font-size:0.7rem;">
                     {% if alert.timestamp_str %}{{ alert.timestamp_str }}{% else %}{{ alert.timestamp|timesince }} ago{% endif %}
                   </div>
                 </div>
-                <span class="badge bg-{{ alert.badge_class }} flex-shrink-0" style="font-size:0.65rem;">!</span>
+                <span class="badge bg-{{ alert.badge_class }} flex-shrink-0" style="font-size:0.62rem;">!</span>
               </div>
               {% endfor %}
             {% else %}
               <div class="empty-state">
-                <i class="fas fa-shield-alt" style="color:#22c55e;"></i>
-                <div class="mt-2 small" style="color:#22c55e;">No alerts this week</div>
+                <i class="fas fa-shield-halved" style="color:var(--ga-success);"></i>
+                <div class="mt-2 small" style="color:var(--ga-success);opacity:0.7;">No alerts this week</div>
               </div>
             {% endif %}
           </div>
         </div>
       </div>
-
     </div>
 
-    {% endif %}{# end selected_child #}
+    {% endif %}
   </div>
 </div>
 {% endblock %}

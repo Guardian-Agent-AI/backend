@@ -4,107 +4,114 @@
 {% block title %}Sign Up{% if plan %} – {{ plan.name }}{% endif %} | Guardian Agent{% endblock %}
 
 {% block content %}
-<section class="signup-section min-vh-100 d-flex align-items-center pt-5">
-    <div class="container py-5">
-        <div class="row justify-content-center g-4">
+<section class="auth-section pt-5">
+    <div class="auth-bg-glow">
+        <div class="auth-bg-grid"></div>
+        <div class="auth-glow-1"></div>
+        <div class="auth-glow-2"></div>
+    </div>
+
+    <div class="container position-relative py-5" style="z-index:2;">
+        <div class="row justify-content-center g-5 align-items-start">
+
             {% if plan %}
-            <div class="col-lg-5 d-flex flex-column justify-content-center" data-animate="fade-right">
-                <a href="{% url 'landing' %}#pricing" class="text-white-50 text-decoration-none small mb-4 d-inline-block" style="width:fit-content;">
-                    <i class="fas fa-chevron-left me-1"></i> Back to plans
-                </a>
-                <p class="text-white-50 text-uppercase small fw-semibold mb-2" style="letter-spacing:.08em;">Selected plan</p>
-                <h2 class="text-white fw-bold mb-1">{{ plan.name }}</h2>
-                <div class="mb-3">
-                    <span class="fs-1 fw-bold text-white">&euro;{{ plan.price_monthly }}</span>
-                    <span class="text-white-50 small"> / mo</span>
+            <div class="col-lg-4 d-none d-lg-block" data-animate="fade-right">
+                <div class="pt-5 mt-4">
+                    <a href="{% url 'landing' %}#pricing" class="d-inline-flex align-items-center gap-2 mb-5 small"
+                       style="color:rgba(255,255,255,0.4);border:1px solid var(--ga-border);border-radius:8px;padding:0.4rem 0.85rem;transition:all 0.2s;">
+                        <i class="fas fa-chevron-left" style="font-size:0.65rem;"></i> Back to plans
+                    </a>
+                    <p class="section-label mb-3">Selected plan</p>
+                    <h2 class="text-white fw-bold mb-1" style="font-size:2rem;letter-spacing:-0.03em;">{{ plan.name }}</h2>
+                    <div class="mb-3">
+                        <span class="text-white fw-bold" style="font-size:2.5rem;font-family:'Space Grotesk',sans-serif;letter-spacing:-0.04em;">&euro;{{ plan.price_monthly }}</span>
+                        <span style="color:rgba(255,255,255,0.4);" class="small">/mo</span>
+                    </div>
+                    <p style="color:rgba(255,255,255,0.45);" class="mb-4 small">{{ plan.description }}</p>
+                    <ul class="list-unstyled mb-4">
+                        {% for feature in plan.feature_list %}
+                        <li class="mb-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;flex-shrink:0;"></i>
+                            <span class="text-white small">{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                        <li class="mb-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;flex-shrink:0;"></i>
+                            <span class="text-white small">{{ plan.max_devices }} device{{ plan.max_devices|pluralize }}</span>
+                        </li>
+                        <li class="mb-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;flex-shrink:0;"></i>
+                            <span class="text-white small">{{ plan.max_children }} child{{ plan.max_children|pluralize:"ren" }} profile{{ plan.max_children|pluralize }}</span>
+                        </li>
+                    </ul>
+                    <p class="small" style="color:rgba(255,255,255,0.3);">
+                        <i class="fas fa-rotate-left me-1"></i>30-day refund &middot; cancel anytime
+                    </p>
                 </div>
-                <p class="text-white-50 mb-4" style="max-width:360px;">{{ plan.description }}</p>
-                <ul class="list-unstyled mb-4">
-                    {% for feature in plan.feature_list %}
-                    <li class="mb-2 text-white d-flex align-items-start">
-                        <i class="fas fa-check text-success me-2 mt-1 small"></i> <span>{{ feature }}</span>
-                    </li>
-                    {% endfor %}
-                    <li class="mb-2 text-white d-flex align-items-start">
-                        <i class="fas fa-check text-success me-2 mt-1 small"></i>
-                        <span>{{ plan.max_devices }} device{{ plan.max_devices|pluralize }}</span>
-                    </li>
-                    <li class="mb-2 text-white d-flex align-items-start">
-                        <i class="fas fa-check text-success me-2 mt-1 small"></i>
-                        <span>{{ plan.max_children }} child{{ plan.max_children|pluralize:"ren" }} profile{{ plan.max_children|pluralize }}</span>
-                    </li>
-                </ul>
-                <p class="text-white-50 small mb-0"><i class="fas fa-undo me-1"></i> 30-day refund policy &middot; cancel anytime</p>
             </div>
             {% endif %}
 
-            <div class="{% if plan %}col-lg-6{% else %}col-lg-5{% endif %}">
-                <div class="signup-form-card p-4 p-md-5 rounded-4 shadow" data-animate="fade-left">
+            <div class="{% if plan %}col-lg-6{% else %}col-lg-5 col-md-7{% endif %}" data-animate="{% if plan %}fade-left{% else %}fade-up{% endif %}">
+                <div class="auth-card p-4 p-md-5">
                     {% if not plan %}
-                    <div class="text-center mb-3">
-                        <img src="{% static 'images/logo.png' %}" alt="Guardian Agent" height="44" class="mb-2">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'images/logo.png' %}" alt="Guardian Agent" height="48" class="mb-3">
                     </div>
                     {% endif %}
-                    <h5 class="fw-bold mb-1">Create an account</h5>
+                    <h4 class="fw-bold text-white mb-1">Create your account</h4>
                     <p class="text-muted small mb-4">Takes about a minute.</p>
 
                     {% if form.non_field_errors %}
-                    <div class="alert alert-danger small py-2">{{ form.non_field_errors.0 }}</div>
+                    <div class="alert alert-danger small py-2 mb-3">{{ form.non_field_errors.0 }}</div>
                     {% endif %}
 
                     <form method="post" novalidate>
                         {% csrf_token %}
-
                         <div class="row g-3 mb-3">
                             <div class="col-6">
-                                <label for="id_first_name" class="form-label small mb-1">First name</label>
+                                <label class="form-label">First name</label>
                                 {{ form.first_name }}
-                                {% if form.first_name.errors %}<div class="text-danger small mt-1">{{ form.first_name.errors.0 }}</div>{% endif %}
+                                {% if form.first_name.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.first_name.errors.0 }}</div>{% endif %}
                             </div>
                             <div class="col-6">
-                                <label for="id_last_name" class="form-label small mb-1">Last name</label>
+                                <label class="form-label">Last name</label>
                                 {{ form.last_name }}
-                                {% if form.last_name.errors %}<div class="text-danger small mt-1">{{ form.last_name.errors.0 }}</div>{% endif %}
+                                {% if form.last_name.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.last_name.errors.0 }}</div>{% endif %}
                             </div>
                         </div>
-
                         <div class="mb-3">
-                            <label for="id_email" class="form-label small mb-1">Email</label>
+                            <label class="form-label">Email</label>
                             {{ form.email }}
-                            {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>{% endif %}
+                            {% if form.email.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.email.errors.0 }}</div>{% endif %}
                         </div>
-
                         <div class="mb-3">
-                            <label for="id_phone_number" class="form-label small mb-1">Phone number</label>
+                            <label class="form-label">Phone number</label>
                             {{ form.phone_number }}
-                            {% if form.phone_number.errors %}<div class="text-danger small mt-1">{{ form.phone_number.errors.0 }}</div>{% endif %}
+                            {% if form.phone_number.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.phone_number.errors.0 }}</div>{% endif %}
                         </div>
-
                         <div class="row g-3 mb-3">
                             <div class="col-6">
-                                <label for="id_password" class="form-label small mb-1">Password</label>
+                                <label class="form-label">Password</label>
                                 {{ form.password }}
-                                {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>{% endif %}
+                                {% if form.password.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.password.errors.0 }}</div>{% endif %}
                             </div>
                             <div class="col-6">
-                                <label for="id_password_confirm" class="form-label small mb-1">Confirm password</label>
+                                <label class="form-label">Confirm password</label>
                                 {{ form.password_confirm }}
-                                {% if form.password_confirm.errors %}<div class="text-danger small mt-1">{{ form.password_confirm.errors.0 }}</div>{% endif %}
+                                {% if form.password_confirm.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.password_confirm.errors.0 }}</div>{% endif %}
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="id_children_count" class="form-label small mb-1">How many children will you monitor?</label>
+                        <div class="mb-4">
+                            <label class="form-label">How many children will you monitor?</label>
                             {{ form.children_count }}
-                            {% if form.children_count.errors %}<div class="text-danger small mt-1">{{ form.children_count.errors.0 }}</div>{% endif %}
+                            {% if form.children_count.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ form.children_count.errors.0 }}</div>{% endif %}
                         </div>
 
                         {% if plan %}
-                        <hr class="my-3">
-                        <p class="fw-semibold small mb-3">Payment method</p>
-
+                        <div style="height:1px;background:var(--ga-border);margin-bottom:1.25rem;"></div>
+                        <p class="fw-semibold small text-white mb-3">Payment method</p>
                         <div class="mb-3">
-                            <label class="form-label small mb-1">Card number</label>
+                            <label class="form-label">Card number</label>
                             <div class="input-group">
                                 <input type="text" name="_card" class="form-control" placeholder="1234 5678 9012 3456"
                                        maxlength="19" autocomplete="off">
@@ -114,38 +121,37 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="row g-3 mb-3">
+                        <div class="row g-3 mb-4">
                             <div class="col-4">
-                                <label class="form-label small mb-1">Expiry</label>
-                                <input type="text" name="_exp" class="form-control" placeholder="MM/YY"
-                                       maxlength="5" autocomplete="off">
+                                <label class="form-label">Expiry</label>
+                                <input type="text" name="_exp" class="form-control" placeholder="MM/YY" maxlength="5" autocomplete="off">
                             </div>
                             <div class="col-4">
-                                <label class="form-label small mb-1">CVC</label>
-                                <input type="text" name="_cvc" class="form-control" placeholder="123"
-                                       maxlength="4" autocomplete="off">
+                                <label class="form-label">CVC</label>
+                                <input type="text" name="_cvc" class="form-control" placeholder="123" maxlength="4" autocomplete="off">
                             </div>
                             <div class="col-4">
-                                <label class="form-label small mb-1">ZIP / Postal</label>
-                                <input type="text" name="_zip" class="form-control" placeholder="10001"
-                                       maxlength="10" autocomplete="off">
+                                <label class="form-label">ZIP</label>
+                                <input type="text" name="_zip" class="form-control" placeholder="10001" maxlength="10" autocomplete="off">
                             </div>
                         </div>
                         {% endif %}
 
-                        <button type="submit" class="btn btn-primary w-100 py-2 mt-2">
+                        <button type="submit" class="btn btn-primary w-100 py-2">
                             {% if plan %}Start subscription &ndash; &euro;{{ plan.price_monthly }}/mo{% else %}Create account{% endif %}
                         </button>
 
                         {% if plan %}
                         <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
-                            <i class="fas fa-lock text-muted" style="font-size:.65rem;"></i>
-                            <span class="text-muted" style="font-size:.75rem;">Encrypted &middot; Cancel anytime</span>
+                            <i class="fas fa-lock" style="color:rgba(255,255,255,0.25);font-size:0.65rem;"></i>
+                            <span style="color:rgba(255,255,255,0.3);font-size:0.75rem;">Encrypted &middot; Cancel anytime</span>
                         </div>
                         {% endif %}
 
-                        <p class="text-muted text-center small mt-3 mb-0">
-                            Already have an account? <a href="{% url 'signin' %}" class="text-decoration-none">Sign in</a>
+                        <div style="height:1px;background:var(--ga-border);margin:1.25rem 0;"></div>
+                        <p class="text-center small mb-0" style="color:rgba(255,255,255,0.4);">
+                            Already have an account?
+                            <a href="{% url 'signin' %}" class="fw-medium" style="color:var(--ga-primary);">Sign in</a>
                         </p>
                     </form>
                 </div>

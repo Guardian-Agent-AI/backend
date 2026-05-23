@@ -4,99 +4,101 @@
 {% block title %}Install Guardian Agent{% endblock %}
 
 {% block content %}
-<section class="pt-5">
+<section class="dashboard-section pt-5">
     <div class="container py-5">
+
         <!-- Header -->
         <div class="text-center mb-5" data-animate="fade-up">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">
-                <i class="fas fa-download me-1"></i> Download
+            <span class="section-label mb-4 d-inline-flex">
+                <i class="fas fa-download" style="font-size:0.65rem;"></i>Download
             </span>
-            <h2 class="display-5 fw-bold">Install <span class="text-gradient">Guardian Agent</span></h2>
-            <p class="text-muted mx-auto" style="max-width:550px;">
+            <h2 class="display-5 fw-bold mt-3 mb-3" style="letter-spacing:-0.03em;">
+                Install <span class="text-gradient">Guardian Agent</span>
+            </h2>
+            <p class="text-muted mx-auto" style="max-width:520px;">
                 Choose your platform below to download the latest release. Installation takes less than a minute.
             </p>
         </div>
 
         <!-- Platform Cards -->
         <div class="row g-4 justify-content-center mb-5">
+
             <!-- Windows -->
             <div class="col-md-6 col-lg-4" data-animate="fade-up">
-                <div class="card border-0 shadow-sm rounded-4 h-100 text-center install-card">
-                    <div class="card-body p-5">
-                        <div class="install-icon mb-4">
-                            <i class="fab fa-windows fa-4x text-primary"></i>
-                        </div>
-                        <h4 class="fw-bold">Windows</h4>
-                        <p class="text-muted small mb-1">Windows 10 / 11 (64-bit)</p>
-                        <p class="text-muted small mb-4">Portable EXE &middot; ~115 MB</p>
-                        <a href="{% url 'download_app' 'windows' %}" class="btn btn-primary w-100 py-2 mb-2">
-                            <i class="fas fa-download me-2"></i> Download for Windows
-                        </a>
-                        <div class="mt-3">
-                            <span class="badge bg-success-subtle text-success">Recommended</span>
-                        </div>
+                <div class="install-card text-center p-5 h-100">
+                    <div class="install-icon mb-4">
+                        <i class="fab fa-windows fa-3x text-primary"></i>
                     </div>
+                    <h4 class="fw-bold text-white mb-1">Windows</h4>
+                    <p class="text-muted small mb-1">Windows 10 / 11 (64-bit)</p>
+                    <p class="text-muted small mb-4">Portable EXE &middot; ~115 MB</p>
+                    <a href="{% url 'download_app' 'windows' %}" class="btn btn-primary w-100 py-2 mb-3">
+                        <i class="fas fa-download me-2" style="font-size:0.8rem;"></i>Download for Windows
+                    </a>
+                    <span class="badge" style="background:rgba(34,211,153,0.1);color:var(--ga-success);border:1px solid rgba(34,211,153,0.15);">
+                        <i class="fas fa-check me-1" style="font-size:0.6rem;"></i>Recommended
+                    </span>
                 </div>
             </div>
 
             <!-- macOS -->
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="100">
-                <div class="card border-0 shadow-sm rounded-4 h-100 text-center install-card">
-                    <div class="card-body p-5">
-                        <div class="install-icon mb-4">
-                            <i class="fab fa-apple fa-4x text-muted"></i>
-                        </div>
-                        <h4 class="fw-bold">macOS</h4>
-                        <p class="text-muted small mb-1">macOS 13+ (Apple Silicon &amp; Intel)</p>
-                        <p class="text-muted small mb-4">DMG Package &middot; ~90 MB</p>
-                        <a href="#" class="btn btn-primary w-100 py-2 mb-2" onclick="return false;">
-                            <i class="fas fa-download me-2"></i> Download for macOS
-                        </a>
-                        <div class="mt-3">
-                            <span class="badge bg-warning-subtle text-warning">Coming Soon</span>
-                        </div>
+                <div class="install-card text-center p-5 h-100">
+                    <div class="install-icon mb-4">
+                        <i class="fab fa-apple fa-3x text-muted"></i>
                     </div>
+                    <h4 class="fw-bold text-white mb-1">macOS</h4>
+                    <p class="text-muted small mb-1">macOS 13+ (Apple Silicon &amp; Intel)</p>
+                    <p class="text-muted small mb-4">DMG Package &middot; ~90 MB</p>
+                    <a href="#" class="btn btn-primary w-100 py-2 mb-3 disabled" onclick="return false;">
+                        <i class="fas fa-download me-2" style="font-size:0.8rem;"></i>Download for macOS
+                    </a>
+                    <span class="badge" style="background:rgba(251,191,36,0.1);color:var(--ga-warning);border:1px solid rgba(251,191,36,0.15);">
+                        <i class="fas fa-clock me-1" style="font-size:0.6rem;"></i>Coming Soon
+                    </span>
                 </div>
             </div>
 
             <!-- Linux -->
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="200">
-                <div class="card border-0 shadow-sm rounded-4 h-100 text-center install-card">
-                    <div class="card-body p-5">
-                        <div class="install-icon mb-4">
-                            <i class="fab fa-linux fa-4x text-muted"></i>
-                        </div>
-                        <h4 class="fw-bold">Linux</h4>
-                        <p class="text-muted small mb-1">Ubuntu 22.04+ / Fedora 38+ / Debian 12+</p>
-                        <p class="text-muted small mb-4">AppImage &amp; .deb &middot; ~80 MB</p>
-                        <a href="#" class="btn btn-primary w-100 py-2 mb-2" onclick="return false;">
-                            <i class="fas fa-download me-2"></i> Download for Linux
-                        </a>
-                        <div class="mt-3">
-                            <span class="badge bg-warning-subtle text-warning">Coming Soon</span>
-                        </div>
+                <div class="install-card text-center p-5 h-100">
+                    <div class="install-icon mb-4">
+                        <i class="fab fa-linux fa-3x text-muted"></i>
                     </div>
+                    <h4 class="fw-bold text-white mb-1">Linux</h4>
+                    <p class="text-muted small mb-1">Ubuntu 22.04+ / Fedora 38+ / Debian 12+</p>
+                    <p class="text-muted small mb-4">AppImage &amp; .deb &middot; ~80 MB</p>
+                    <a href="#" class="btn btn-primary w-100 py-2 mb-3 disabled" onclick="return false;">
+                        <i class="fas fa-download me-2" style="font-size:0.8rem;"></i>Download for Linux
+                    </a>
+                    <span class="badge" style="background:rgba(251,191,36,0.1);color:var(--ga-warning);border:1px solid rgba(251,191,36,0.15);">
+                        <i class="fas fa-clock me-1" style="font-size:0.6rem;"></i>Coming Soon
+                    </span>
                 </div>
             </div>
         </div>
 
         <!-- Setup Instructions -->
-        <div class="row justify-content-center mt-4" data-animate="fade-up">
-            <div class="col-lg-8">
-                <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3"><i class="fas fa-list-ol text-primary me-2"></i> Quick Setup</h5>
-                        <ol class="small mb-0">
-                            <li class="mb-2">Download the installer for your platform above.</li>
-                            <li class="mb-2">Run the installer and follow the on-screen prompts.</li>
-                            <li class="mb-2">Sign in with the same email and password you used on this website.</li>
-                            <li class="mb-2">Select the games and apps you'd like to monitor.</li>
-                            <li class="mb-0">Guardian Agent will run silently in the background — you're all set!</li>
-                        </ol>
+        <div class="row justify-content-center" data-animate="fade-up">
+            <div class="col-lg-7">
+                <div class="settings-card">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-list-ol" style="color:var(--ga-primary);font-size:0.75rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Quick Setup</h5>
                     </div>
+                    <ol class="mb-0" style="padding-left:1.25rem;">
+                        <li class="mb-3 small text-muted">Download the installer for your platform above.</li>
+                        <li class="mb-3 small text-muted">Run the installer and follow the on-screen prompts.</li>
+                        <li class="mb-3 small text-muted">Sign in with the same email and password you used on this website.</li>
+                        <li class="mb-3 small text-muted">Select the games and apps you'd like to monitor.</li>
+                        <li class="small text-muted">Guardian Agent will run silently in the background — you're all set!</li>
+                    </ol>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 {% endblock %}

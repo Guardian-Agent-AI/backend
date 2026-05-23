@@ -5,38 +5,40 @@
 
 {% block content %}
 
-<!-- ===================== HERO SECTION ===================== -->
+<!-- ===================== HERO ===================== -->
 <section class="hero-section" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-gradient-2"></div>
     <div class="hero-particles" id="particles"></div>
-    <div class="container position-relative">
+
+    <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center min-vh-100 pt-5">
             <div class="col-lg-6 text-center text-lg-start" data-animate="fade-right">
-                <h1 class="display-3 fw-900 text-white mb-4 hero-title">
+                <div class="mb-4">
+                    <span class="section-label">
+                        <i class="fas fa-shield-halved" style="font-size:0.65rem;"></i>
+                        AI-Powered Protection
+                    </span>
+                </div>
+                <h1 class="hero-title text-white mb-4">
                     Let Your Kids <span class="text-gradient">Play Safely</span> Online
                 </h1>
-                <p class="lead mb-4 pe-lg-5" style="color:rgba(255,255,255,0.82);">
-                    Guardian Agent monitors voice and text chat in real time, detects harmful
-                    interactions, and alerts you instantly &mdash; so your children can game
-                    freely while you have peace of mind.
+                <p class="mb-5 pe-lg-5" style="color:rgba(255,255,255,0.65);font-size:1.1rem;line-height:1.7;max-width:480px;">
+                    Guardian Agent monitors voice and text chat in real time, detects harmful interactions, and alerts you instantly.
                 </p>
-                <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                    <a href="#pricing" class="btn btn-primary btn-lg px-4 shadow-lg">
-                        Get Protected <i class="fas fa-arrow-right ms-2"></i>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-5">
+                    <a href="#pricing" class="btn btn-primary btn-lg px-4">
+                        Get Protected <i class="fas fa-arrow-right ms-2" style="font-size:0.85rem;"></i>
                     </a>
                     <a href="#how-it-works" class="btn btn-outline-light btn-lg px-4">
-                        Learn More
+                        See How It Works
                     </a>
                 </div>
-                <div class="mt-4 d-flex gap-4 justify-content-center justify-content-lg-start">
-                    <div class="text-white small">
-                        <i class="fas fa-check text-success me-1"></i> No game lag
-                    </div>
-                    <div class="text-white small">
-                        <i class="fas fa-check text-success me-1"></i> Privacy-first
-                    </div>
-                    <div class="text-white small">
-                        <i class="fas fa-check text-success me-1"></i> Cancel anytime
-                    </div>
+                <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+                    <span class="trust-pill"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;"></i> No game lag</span>
+                    <span class="trust-pill"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;"></i> Privacy-first</span>
+                    <span class="trust-pill"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.65rem;"></i> Cancel anytime</span>
                 </div>
             </div>
             <div class="col-lg-6 text-center mt-5 mt-lg-0" data-animate="fade-left">
@@ -47,90 +49,86 @@
             </div>
         </div>
     </div>
-    <div class="hero-wave">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="#ffffff"/>
-        </svg>
-    </div>
 </section>
-
-
 
 <!-- ===================== BY THE NUMBERS ===================== -->
 <section class="py-6 bg-dark-gradient" id="by-the-numbers">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <h2 class="display-5 fw-bold text-white mb-3">
+            <span class="section-label mb-4 d-inline-flex">
+                <i class="fas fa-chart-bar" style="font-size:0.65rem;"></i>By the Numbers
+            </span>
+            <h2 class="display-5 fw-bold text-white mt-3 mb-3" style="letter-spacing:-0.03em;">
                 Gaming is how kids <span class="text-gradient">connect</span> today.<br>
-                <span style="color:#ef4444;">But the risks are growing.</span>
+                <span style="color:#f87171;">But the risks are growing.</span>
             </h2>
-            <p class="text-white-50 mx-auto" style="max-width:600px;">
+            <p style="color:rgba(255,255,255,0.5);max-width:560px;margin:auto;">
                 For most children, online multiplayer isn't just entertainment — it's their social life.
                 We want to keep it that way, while keeping them safe.
             </p>
         </div>
-        <div class="row g-4 justify-content-center mb-4">
+        <div class="row g-4 justify-content-center mb-5">
             <div class="col-md-4" data-animate="fade-up">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="display-4 fw-900 text-gradient mb-2">85%</div>
+                <div class="step-card text-center p-5 h-100">
+                    <div class="stat-number text-gradient mb-2">85%</div>
                     <p class="text-white fw-semibold mb-1">of kids play video games</p>
-                    <p class="text-white-50 small mb-0">Gaming is mainstream — and for many kids, it's their primary way of hanging out with friends.</p>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">Gaming is mainstream — and for many kids, it's their primary way of hanging out with friends.</p>
                 </div>
             </div>
             <div class="col-md-4" data-animate="fade-up" data-delay="150">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="display-4 fw-900 mb-2" style="color:#ef4444;">75%</div>
-                    <p class="text-white fw-semibold mb-1">of teens experienced harassment in online games in 2023</p>
-                    <p class="text-white-50 small mb-0">Up from 67% the year before — and rising across every age group.</p>
+                <div class="step-card text-center p-5 h-100">
+                    <div class="stat-number mb-2" style="color:#f87171;">75%</div>
+                    <p class="text-white fw-semibold mb-1">experienced harassment in games</p>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">Up from 67% the year before — and rising across every age group.</p>
                 </div>
             </div>
             <div class="col-md-4" data-animate="fade-up" data-delay="300">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="display-4 fw-900 mb-2" style="color:#f97316;">37%</div>
+                <div class="step-card text-center p-5 h-100">
+                    <div class="stat-number mb-2" style="color:#fb923c;">37%</div>
                     <p class="text-white fw-semibold mb-1">faced identity-based harassment</p>
-                    <p class="text-white-50 small mb-0">Targeted for their race, gender, or identity — up from 29% in 2022.</p>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">Targeted for their race, gender, or identity — up from 29% in 2022.</p>
                 </div>
             </div>
         </div>
-        <div class="text-center mb-5" data-animate="fade-up">
-            <p class="text-white-50" style="font-size:0.78rem;">
+        <div class="text-center mb-5">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.75rem;">
                 Sources:
-                <a href="https://www.pewresearch.org/internet/2024/05/09/teens-and-video-games-today/" target="_blank" rel="noopener" class="text-white-50">Pew Research Center, 2024</a>
+                <a href="https://www.pewresearch.org/internet/2024/05/09/teens-and-video-games-today/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.35);">Pew Research Center, 2024</a>
                 &nbsp;·&nbsp;
-                <a href="https://www.adl.org/resources/report/playing-hate-how-online-gamers-diverse-identity-usernames-are-treated" target="_blank" rel="noopener" class="text-white-50">ADL, 2023</a>
+                <a href="https://www.adl.org/resources/report/playing-hate-how-online-gamers-diverse-identity-usernames-are-treated" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.35);">ADL, 2023</a>
             </p>
         </div>
         <div class="row g-3 justify-content-center" data-animate="fade-up">
             <div class="col-md-4">
-                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(255,255,255,0.05);">
-                    <div class="flex-shrink-0 rounded-circle p-3" style="background:rgba(239,68,68,0.15);color:#ef4444;">
-                        <i class="fas fa-user-secret fa-lg"></i>
+                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.12);">
+                    <div class="problem-icon" style="background:rgba(248,113,113,0.12);">
+                        <i class="fas fa-user-secret" style="color:#f87171;"></i>
                     </div>
                     <div>
-                        <strong class="text-white small">Grooming &amp; Predators</strong>
-                        <p class="text-white-50 small mb-0">Adults posing as children in game chats</p>
+                        <strong class="text-white small d-block">Grooming &amp; Predators</strong>
+                        <span style="color:rgba(255,255,255,0.45);" class="small">Adults posing as children in game chats</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(255,255,255,0.05);">
-                    <div class="flex-shrink-0 rounded-circle p-3" style="background:rgba(249,115,22,0.15);color:#f97316;">
-                        <i class="fas fa-mask fa-lg"></i>
+                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(251,146,60,0.06);border:1px solid rgba(251,146,60,0.12);">
+                    <div class="problem-icon" style="background:rgba(251,146,60,0.12);">
+                        <i class="fas fa-mask" style="color:#fb923c;"></i>
                     </div>
                     <div>
-                        <strong class="text-white small">Identity Deception</strong>
-                        <p class="text-white-50 small mb-0">Strangers using fake profiles to build trust with minors</p>
+                        <strong class="text-white small d-block">Identity Deception</strong>
+                        <span style="color:rgba(255,255,255,0.45);" class="small">Strangers using fake profiles to build trust</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(255,255,255,0.05);">
-                    <div class="flex-shrink-0 rounded-circle p-3" style="background:rgba(72,202,228,0.15);color:var(--ga-primary-light);">
-                        <i class="fas fa-comments fa-lg"></i>
+                <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.12);">
+                    <div class="problem-icon" style="background:rgba(56,189,248,0.12);">
+                        <i class="fas fa-comments" style="color:var(--ga-primary);"></i>
                     </div>
                     <div>
-                        <strong class="text-white small">Manipulation Tactics</strong>
-                        <p class="text-white-50 small mb-0">Predators isolating children through private messages</p>
+                        <strong class="text-white small d-block">Manipulation Tactics</strong>
+                        <span style="color:rgba(255,255,255,0.45);" class="small">Predators isolating children through private messages</span>
                     </div>
                 </div>
             </div>
@@ -150,7 +148,7 @@
                 </filter>
             </defs>
         </svg>
-        <div class="gradients-container" style="filter: url(#goo2) blur(40px);">
+        <div class="gradients-container" style="filter:url(#goo2) blur(40px);">
             <div class="g1" style="animation-duration:15s;"></div>
             <div class="g2" style="animation-duration:11s;"></div>
             <div class="g3" style="animation-duration:13s;"></div>
@@ -161,161 +159,146 @@
     </div>
     <div class="container position-relative" style="z-index:2;">
         <div class="text-center mb-5" data-animate="fade-up">
-            <h2 class="display-5 fw-bold">How Guardian Agent <span class="text-gradient">Keeps Kids Safe</span></h2>
-            <p class="text-muted mx-auto" style="max-width:600px;">
-                AI-powered protection that runs silently in the background &mdash; no disruption to gameplay, full peace of mind.
+            <span class="section-label mb-4 d-inline-flex">
+                <i class="fas fa-sparkles" style="font-size:0.65rem;"></i>Features
+            </span>
+            <h2 class="display-5 fw-bold mt-3 mb-3" style="letter-spacing:-0.03em;">
+                How Guardian Agent <span class="text-gradient">Keeps Kids Safe</span>
+            </h2>
+            <p class="text-muted mx-auto" style="max-width:560px;">
+                AI-powered protection that runs silently in the background — no disruption to gameplay, full peace of mind.
             </p>
         </div>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4" data-animate="fade-up">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-microphone-lines fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-microphone-lines"></i></div>
                     </div>
-                    <h5 class="fw-bold">Voice Chat Monitoring</h5>
-                    <p class="text-muted small">
-                        Listens to in-game voice chat and transcribes it in real time, detecting harmful language, grooming patterns, and threats.
-                    </p>
+                    <h5 class="fw-bold mb-2">Voice Chat Monitoring</h5>
+                    <p class="text-muted small mb-0">Listens to in-game voice chat and transcribes it in real time, detecting harmful language, grooming patterns, and threats.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="100">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-comment-dots fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-comment-dots"></i></div>
                     </div>
-                    <h5 class="fw-bold">Text Chat Analysis</h5>
-                    <p class="text-muted small">
-                        Scans text messages across games and apps for inappropriate content, personal information sharing, and manipulative behavior.
-                    </p>
+                    <h5 class="fw-bold mb-2">Text Chat Analysis</h5>
+                    <p class="text-muted small mb-0">Scans text messages across games and apps for inappropriate content, personal information sharing, and manipulative behavior.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="200">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
                     </div>
-                    <h5 class="fw-bold">AI-Powered Detection</h5>
-                    <p class="text-muted small">
-                        Uses a fine-tuned LLM to understand context and intent, going far beyond simple keyword filters used by games.
-                    </p>
+                    <h5 class="fw-bold mb-2">AI-Powered Detection</h5>
+                    <p class="text-muted small mb-0">Uses a fine-tuned LLM to understand context and intent, going far beyond simple keyword filters used by games.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="300">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-bell fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-bell"></i></div>
                     </div>
-                    <h5 class="fw-bold">Instant Parent Alerts</h5>
-                    <p class="text-muted small">
-                        Get notified immediately when a risk is detected. View incident details and take action right from your phone.
-                    </p>
+                    <h5 class="fw-bold mb-2">Instant Parent Alerts</h5>
+                    <p class="text-muted small mb-0">Get notified immediately when a risk is detected. View incident details and take action right from your phone.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="400">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-sliders fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-sliders"></i></div>
                     </div>
-                    <h5 class="fw-bold">Custom Safety Rules</h5>
-                    <p class="text-muted small">
-                        Set age-appropriate protection levels and choose which games and apps to monitor. Full control in your hands.
-                    </p>
+                    <h5 class="fw-bold mb-2">Custom Safety Rules</h5>
+                    <p class="text-muted small mb-0">Set age-appropriate protection levels and choose which games and apps to monitor. Full control in your hands.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="500">
-                <div class="feature-card h-100 p-4 rounded-4">
+                <div class="feature-card h-100 p-4">
                     <div class="feature-icon-wrap mb-3">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-shield fa-2x"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
                     </div>
-                    <h5 class="fw-bold">Privacy-First Design</h5>
-                    <p class="text-muted small">
-                        Runs locally on your computer. Audio and text are analyzed on-device &mdash; nothing is stored or shared with third parties.
-                    </p>
+                    <h5 class="fw-bold mb-2">Privacy-First Design</h5>
+                    <p class="text-muted small mb-0">Runs locally on your computer. Audio and text are analyzed on-device — nothing is stored or shared with third parties.</p>
                 </div>
             </div>
         </div>
+
         <!-- Stats bar -->
-        <div class="row text-center g-4 mt-5">
+        <div class="row text-center g-4 mt-5 pt-3" style="border-top:1px solid var(--ga-border);">
             <div class="col-6 col-md-3" data-animate="fade-up">
                 <div class="counter-box">
-                    <h3 class="fw-bold text-primary">&mdash;</h3>
-                    <small style="color:rgba(255,255,255,0.5);">Families Protected</small>
+                    <h3 class="fw-bold text-primary mb-1" style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;">Families Protected</small>
                 </div>
             </div>
             <div class="col-6 col-md-3" data-animate="fade-up" data-delay="100">
                 <div class="counter-box">
-                    <h3 class="fw-bold text-primary">&mdash;</h3>
-                    <small style="color:rgba(255,255,255,0.5);">Threats Blocked</small>
+                    <h3 class="fw-bold text-primary mb-1" style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;">Threats Blocked</small>
                 </div>
             </div>
             <div class="col-6 col-md-3" data-animate="fade-up" data-delay="200">
                 <div class="counter-box">
-                    <h3 class="fw-bold text-primary">&mdash;</h3>
-                    <small style="color:rgba(255,255,255,0.5);">Games Supported</small>
+                    <h3 class="fw-bold text-primary mb-1" style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;">&mdash;</h3>
+                    <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;">Games Supported</small>
                 </div>
             </div>
             <div class="col-6 col-md-3" data-animate="fade-up" data-delay="300">
                 <div class="counter-box">
-                    <h3 class="fw-bold text-primary"><i class="fas fa-star text-warning"></i> &mdash;</h3>
-                    <small style="color:rgba(255,255,255,0.5);">Parent Rating</small>
+                    <h3 class="fw-bold text-primary mb-1" style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;">
+                        <i class="fas fa-star text-warning me-1" style="font-size:1rem;"></i>&mdash;
+                    </h3>
+                    <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;">Parent Rating</small>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
 <section class="py-6 bg-dark-gradient" id="how-it-works">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <h2 class="display-5 fw-bold text-white">Up and Running in <span class="text-gradient">3 Minutes</span></h2>
-            <p class="text-white-50 mx-auto" style="max-width:600px;">
+            <span class="section-label mb-4 d-inline-flex">
+                <i class="fas fa-rocket" style="font-size:0.65rem;"></i>Quick Setup
+            </span>
+            <h2 class="display-5 fw-bold text-white mt-3 mb-3" style="letter-spacing:-0.03em;">
+                Up and Running in <span class="text-gradient">3 Minutes</span>
+            </h2>
+            <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:auto;">
                 Simple setup, powerful protection. No technical knowledge required.
             </p>
         </div>
         <div class="row g-4">
             <div class="col-md-4" data-animate="fade-up">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="step-number">1</div>
-                    <div class="step-icon my-3">
-                        <i class="fas fa-download fa-3x text-primary"></i>
-                    </div>
-                    <h5 class="fw-bold text-white">Install &amp; Subscribe</h5>
-                    <p class="text-white-50 small">
+                <div class="step-card text-center p-5 h-100">
+                    <div class="step-number mx-auto mb-4">1</div>
+                    <div class="mb-3"><i class="fas fa-download fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold text-white mb-2">Install &amp; Subscribe</h5>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">
                         Choose a plan, download the Guardian Agent desktop app, and create your parent account in under a minute.
                     </p>
                 </div>
             </div>
             <div class="col-md-4" data-animate="fade-up" data-delay="150">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="step-number">2</div>
-                    <div class="step-icon my-3">
-                        <i class="fas fa-gamepad fa-3x text-primary"></i>
-                    </div>
-                    <h5 class="fw-bold text-white">Select Games &amp; Rules</h5>
-                    <p class="text-white-50 small">
+                <div class="step-card text-center p-5 h-100">
+                    <div class="step-number mx-auto mb-4">2</div>
+                    <div class="mb-3"><i class="fas fa-gamepad fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold text-white mb-2">Select Games &amp; Rules</h5>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">
                         Pick which games and apps to monitor. Set age-based safety rules and notification preferences.
                     </p>
                 </div>
             </div>
             <div class="col-md-4" data-animate="fade-up" data-delay="300">
-                <div class="step-card text-center p-4 rounded-4 h-100">
-                    <div class="step-number">3</div>
-                    <div class="step-icon my-3">
-                        <i class="fas fa-shield-halved fa-3x text-primary"></i>
-                    </div>
-                    <h5 class="fw-bold text-white">Relax &mdash; They're Protected</h5>
-                    <p class="text-white-50 small">
+                <div class="step-card text-center p-5 h-100">
+                    <div class="step-number mx-auto mb-4">3</div>
+                    <div class="mb-3"><i class="fas fa-shield-halved fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold text-white mb-2">Relax — They're Protected</h5>
+                    <p style="color:rgba(255,255,255,0.45);" class="small mb-0">
                         Guardian Agent runs silently in the background. You'll be alerted only when something needs your attention.
                     </p>
                 </div>
@@ -325,33 +308,39 @@
 </section>
 
 <!-- ===================== PRICING ===================== -->
-<section class="py-6 bg-white" id="pricing">
+<section class="py-6" id="pricing" style="background:var(--ga-body);">
     <div class="container">
         <div class="text-center mb-5" data-animate="fade-up">
-            <h2 class="display-5 fw-bold">Choose Your <span class="text-gradient">Protection Plan</span></h2>
-            <p class="text-muted mx-auto" style="max-width:600px;">
+            <span class="section-label mb-4 d-inline-flex">
+                <i class="fas fa-tag" style="font-size:0.65rem;"></i>Pricing
+            </span>
+            <h2 class="display-5 fw-bold mt-3 mb-3" style="letter-spacing:-0.03em;">
+                Choose Your <span class="text-gradient">Protection Plan</span>
+            </h2>
+            <p class="text-muted mx-auto" style="max-width:520px;">
                 Flexible plans that grow with your family. All plans include full AI monitoring. Cancel anytime.
             </p>
         </div>
         <div class="row g-4 justify-content-center">
             {% for plan in plans %}
-            <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="{{ forloop.counter0|add:forloop.counter0 }}00">
-                <div class="pricing-card h-100 p-4 rounded-4 {% if forloop.counter == 2 %}pricing-featured{% endif %}">
-                    <h5 class="fw-bold">{{ plan.name }}</h5>
-                    <p class="text-muted small">{{ plan.description }}</p>
-                    <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;{{ plan.price_monthly }}</span>
-                        <span class="text-muted">/month</span>
+            <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="{{ forloop.counter0 }}00">
+                <div class="pricing-card h-100 p-4 {% if forloop.counter == 2 %}pricing-featured{% endif %}">
+                    {% if forloop.counter == 2 %}<div class="popular-badge">Most Popular</div>{% endif %}
+                    <h5 class="fw-bold mb-1">{{ plan.name }}</h5>
+                    <p class="text-muted small mb-4">{{ plan.description }}</p>
+                    <div class="pricing-amount mb-4">
+                        <span class="display-4 fw-bold text-white" style="font-family:'Space Grotesk',sans-serif;letter-spacing:-0.04em;">&euro;{{ plan.price_monthly }}</span>
+                        <span class="text-muted">/mo</span>
                     </div>
                     <ul class="list-unstyled mb-4">
                         {% for feature in plan.feature_list %}
-                        <li class="mb-2">
-                            <i class="fas fa-check-circle text-success me-2"></i>
+                        <li class="mb-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;flex-shrink:0;"></i>
                             <span class="small">{{ feature }}</span>
                         </li>
                         {% endfor %}
-                        <li class="mb-2">
-                            <i class="fas fa-check-circle text-success me-2"></i>
+                        <li class="mb-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;flex-shrink:0;"></i>
                             <span class="small">Up to {{ plan.max_devices }} device{{ plan.max_devices|pluralize }}</span>
                         </li>
                     </ul>
@@ -369,122 +358,142 @@
                 </div>
             </div>
             {% empty %}
-            <!-- Fallback plans when no DB plans exist yet -->
+            <!-- Fallback plans -->
             <div class="col-md-6 col-lg-4" data-animate="fade-up">
-                <div class="pricing-card h-100 p-4 rounded-4">
-                    <h5 class="fw-bold">Free</h5>
-                    <p class="text-muted small">Try Guardian Agent at no cost</p>
-                    <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;0</span>
-                        <span class="text-muted">/month</span>
+                <div class="pricing-card h-100 p-4">
+                    <h5 class="fw-bold mb-1">Free</h5>
+                    <p class="text-muted small mb-4">Try Guardian Agent at no cost</p>
+                    <div class="pricing-amount mb-4">
+                        <span class="display-4 fw-bold text-white" style="font-family:'Space Grotesk',sans-serif;letter-spacing:-0.04em;">&euro;0</span>
+                        <span class="text-muted">/mo</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 hour monitoring per day</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Dashboard alerts only</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 device</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">1 hour monitoring per day</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Voice chat monitoring</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Text chat analysis</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Dashboard alerts only</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">1 device</span></li>
                     </ul>
                     <span class="btn btn-outline-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="100">
-                <div class="pricing-card h-100 p-4 rounded-4 pricing-featured">
-                    <h5 class="fw-bold">Basic</h5>
-                    <p class="text-muted small">Full protection for one device</p>
-                    <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;5</span>
-                        <span class="text-muted">/month</span>
+                <div class="pricing-card h-100 p-4 pricing-featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h5 class="fw-bold mb-1">Basic</h5>
+                    <p class="text-muted small mb-4">Full protection for one device</p>
+                    <div class="pricing-amount mb-4">
+                        <span class="display-4 fw-bold text-white" style="font-family:'Space Grotesk',sans-serif;letter-spacing:-0.04em;">&euro;5</span>
+                        <span class="text-muted">/mo</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited monitoring</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Alerts to 1 phone number</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">1 device</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Unlimited monitoring</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Voice chat monitoring</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Text chat analysis</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Alerts to 1 phone number</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">1 device</span></li>
                     </ul>
                     <span class="btn btn-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4" data-animate="fade-up" data-delay="200">
-                <div class="pricing-card h-100 p-4 rounded-4">
-                    <h5 class="fw-bold">Family</h5>
-                    <p class="text-muted small">Protect the whole family</p>
-                    <div class="pricing-amount my-4">
-                        <span class="display-4 fw-900">&euro;7.50</span>
-                        <span class="text-muted">/month</span>
+                <div class="pricing-card h-100 p-4">
+                    <h5 class="fw-bold mb-1">Family</h5>
+                    <p class="text-muted small mb-4">Protect the whole family</p>
+                    <div class="pricing-amount mb-4">
+                        <span class="display-4 fw-bold text-white" style="font-family:'Space Grotesk',sans-serif;letter-spacing:-0.04em;">&euro;7.50</span>
+                        <span class="text-muted">/mo</span>
                     </div>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Unlimited monitoring</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Voice chat monitoring</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Text chat analysis</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">All games supported</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Alerts to 2 phone numbers</span></li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><span class="small">Up to 4 devices</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Unlimited monitoring</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Voice + text chat analysis</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Alerts to 2 phone numbers</span></li>
+                        <li class="mb-2 d-flex align-items-center gap-2"><i class="fas fa-check" style="color:var(--ga-success);font-size:0.7rem;"></i><span class="small">Up to 4 devices</span></li>
                     </ul>
                     <span class="btn btn-outline-primary w-100 py-2 disabled">Coming Soon</span>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <!-- Trusted by Parents -->
-        <div class="text-center mt-5 pt-4" data-animate="fade-up">
-            <h4 class="fw-bold">Trusted by <span class="text-gradient">Parents</span></h4>
-            <p class="text-muted small">Coming soon.</p>
+        <div class="text-center mt-5 pt-3" data-animate="fade-up">
+            <p class="small" style="color:rgba(255,255,255,0.3);">
+                <i class="fas fa-lock me-1"></i> 30-day refund policy &middot; Cancel anytime &middot; No hidden fees
+            </p>
         </div>
     </div>
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<section class="py-6 bg-white" id="contact">
-    <div class="container">
+<section class="py-6" id="contact" style="background:var(--ga-body);">
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="gradient-svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive" id="interactiveBubble"></div>
+        </div>
+    </div>
+    <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-animate="fade-right">
-                <h2 class="display-5 fw-bold">Have Questions? <span class="text-gradient">Let's Talk</span></h2>
-                <p class="text-muted">
-                    Whether you want to learn more about Guardian Agent or need help getting started,
-                    we're here for you.
+            <div class="col-lg-5" data-animate="fade-right">
+                <span class="section-label mb-4 d-inline-flex">
+                    <i class="fas fa-envelope" style="font-size:0.65rem;"></i>Contact
+                </span>
+                <h2 class="display-5 fw-bold text-white mt-3 mb-3" style="letter-spacing:-0.03em;">
+                    Have Questions? <span class="text-gradient">Let's Talk</span>
+                </h2>
+                <p style="color:rgba(255,255,255,0.5);" class="mb-5">
+                    Whether you want to learn more about Guardian Agent or need help getting started, we're here for you.
                 </p>
-                <div class="d-flex align-items-center mb-3">
-                    <div class="contact-icon bg-primary-subtle text-primary rounded-circle p-3 me-3">
-                        <i class="fas fa-envelope"></i>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="contact-icon rounded-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15);">
+                        <i class="fas fa-envelope text-primary"></i>
                     </div>
                     <div>
-                        <strong class="small">Email</strong>
-                        <p class="text-muted small mb-0">support@guardianagent.com</p>
+                        <strong class="text-white small d-block">Email</strong>
+                        <span style="color:rgba(255,255,255,0.45);" class="small">support@guardianagent.com</span>
                     </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="contact-icon bg-primary-subtle text-primary rounded-circle p-3 me-3">
-                        <i class="fas fa-clock"></i>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="contact-icon rounded-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15);">
+                        <i class="fas fa-clock text-primary"></i>
                     </div>
                     <div>
-                        <strong class="small">Response Time</strong>
-                        <p class="text-muted small mb-0">Within 24 hours</p>
+                        <strong class="text-white small d-block">Response Time</strong>
+                        <span style="color:rgba(255,255,255,0.45);" class="small">Within 24 hours</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" data-animate="fade-left">
-                <div class="contact-form-card p-4 rounded-4 bg-white border">
+            <div class="col-lg-7" data-animate="fade-left">
+                <div class="contact-form-card p-4 p-md-5">
                     <form method="post" action="{% url 'landing' %}#contact">
                         {% csrf_token %}
                         <input type="hidden" name="contact_submit" value="1">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small">Name</label>
+                        <div class="mb-4">
+                            <label class="form-label">Name</label>
                             {{ contact_form.name }}
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small">Email</label>
+                        <div class="mb-4">
+                            <label class="form-label">Email</label>
                             {{ contact_form.email }}
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small">Message</label>
+                        <div class="mb-4">
+                            <label class="form-label">Message</label>
                             {{ contact_form.message }}
                         </div>
                         <button type="submit" class="btn btn-primary w-100 py-2">
-                            <i class="fas fa-paper-plane me-2"></i> Send Message
+                            <i class="fas fa-paper-plane me-2" style="font-size:0.85rem;"></i>Send Message
                         </button>
                     </form>
                 </div>
@@ -492,7 +501,5 @@
         </div>
     </div>
 </section>
-})();
-</script>
 
 {% endblock %}
