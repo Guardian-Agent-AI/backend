@@ -12,6 +12,9 @@ from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm
 
 # ─── Landing ──────────────────────────────────────────────
 def landing(request):
+    if request.user.is_authenticated and request.method == 'GET':
+        return redirect('dashboard')
+
     plans = Plan.objects.filter(is_active=True).order_by('price_monthly')
     contact_form = ContactForm()
 
@@ -103,6 +106,13 @@ def signout_view(request):
     logout(request)
     messages.success(request, 'You have been signed out.')
     return redirect('landing')
+
+
+# ─── Dashboard (minimal welcome) ──────────────────────────
+@login_required(login_url='signin')
+def dashboard(request):
+    return render(request, 'core/dashboard.html')
+
 
 
 # ─── Choose / Change Plan ────────────────────────────────

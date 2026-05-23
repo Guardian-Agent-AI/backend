@@ -19,6 +19,8 @@ class Plan(models.Model):
     features = models.TextField(blank=True, help_text="One feature per line")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    stripe_product_id = models.CharField(max_length=100, blank=True, default='')
+    stripe_price_id = models.CharField(max_length=100, blank=True, default='', db_index=True)
 
     def feature_list(self):
         return [f.strip() for f in self.features.splitlines() if f.strip()]
@@ -29,11 +31,34 @@ class Plan(models.Model):
 
 class UserProfile(models.Model):
     """Extended profile linked to Django User – stores phone, plan, etc."""
+    SUB_STATUS_NONE       = 'none'
+    SUB_STATUS_ACTIVE     = 'active'
+    SUB_STATUS_PAST_DUE   = 'past_due'
+    SUB_STATUS_CANCELING  = 'canceling'  # cancels at period end
+    SUB_STATUS_CANCELED   = 'canceled'
+    SUB_STATUS_CHOICES = [
+        (SUB_STATUS_NONE,      'No subscription'),
+        (SUB_STATUS_ACTIVE,    'Active'),
+        (SUB_STATUS_PAST_DUE,  'Past due'),
+        (SUB_STATUS_CANCELING, 'Cancels at period end'),
+        (SUB_STATUS_CANCELED,  'Canceled'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone_number = models.CharField(max_length=17, validators=[phone_validator], blank=True, default='')
     plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True)
     children_count = models.PositiveIntegerField(default=1)
     signed_up_at = models.DateTimeField(default=timezone.now)
+
+    # Stripe linkage
+    stripe_customer_id = models.CharField(max_length=100, blank=True, default='', db_index=True)
+    stripe_subscription_id = models.CharField(max_length=100, blank=True, default='', db_index=True)
+    subscription_status = models.CharField(max_length=20, choices=SUB_STATUS_CHOICES, default=SUB_STATUS_NONE)
+    current_period_end = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def has_active_subscription(self):
+        return self.subscription_status in (self.SUB_STATUS_ACTIVE, self.SUB_STATUS_CANCELING)
 
     def __str__(self):
         return f"{self.user.get_full_name()} ({self.user.email})"
