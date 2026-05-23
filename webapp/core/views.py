@@ -6,9 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings as django_settings
 from django.http import FileResponse, Http404
 from pathlib import Path
-from datetime import timedelta
-from django.utils import timezone
-from .models import Plan, UserProfile, Child, AlertEvent, CommunityThreatStat, CommunityPeakTimeStat, Device
+from .models import Plan, UserProfile, Child, Device
 from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm, ChangePasswordForm, ChildForm
 
 
@@ -37,14 +35,14 @@ def signup_view(request, plan_id=None):
         plan = get_object_or_404(Plan, id=plan_id, is_active=True)
 
     if request.user.is_authenticated:
-        # Already logged in → assign plan and go to dashboard
+        # Already logged in → assign plan and go to settings
         if plan:
             profile = request.user.profile
             profile.plan = plan
             profile.save()
             messages.success(request, f'You are now on the {plan.name} plan!')
-            return redirect('dashboard')
-        return redirect('dashboard')
+            return redirect('settings')
+        return redirect('settings')
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -75,7 +73,7 @@ def signup_view(request, plan_id=None):
 # ─── Auth: Sign In ───────────────────────────────────────
 def signin_view(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('settings')
 
     form = LoginForm()
     if request.method == 'POST':
@@ -92,7 +90,7 @@ def signin_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                next_url = request.GET.get('next', 'dashboard')
+                next_url = request.GET.get('next', 'settings')
                 return redirect(next_url)
             else:
                 messages.error(request, 'Invalid email or password.')
@@ -105,124 +103,6 @@ def signout_view(request):
     logout(request)
     messages.success(request, 'You have been signed out.')
     return redirect('landing')
-
-
-# ─── Dashboard ────────────────────────────────────────────
-_MOCK_ALERTS = [
-    {'badge_class': 'secondary', 'icon': 'fa-share-alt',     'display_category': 'Social Media',     'game_name': 'Roblox',    'timestamp_str': '1 day ago',  'sms_message': 'Guardian Alert: A social media solicitation was detected on Roblox. Another player asked Emma to add them on Snapchat. They are attempting to move the conversation off-platform.'},
-    {'badge_class': 'warning',   'icon': 'fa-id-card',       'display_category': 'Personal Info',    'game_name': 'Minecraft', 'timestamp_str': '4 days ago', 'sms_message': 'Guardian Alert: A personal information request was detected on Minecraft. A player asked "what school do you go to?" Personal details were directly solicited.'},
-    {'badge_class': 'danger',    'icon': 'fa-map-marker-alt','display_category': 'Meeting Request',  'game_name': 'Fortnite',  'timestamp_str': '6 days ago', 'sms_message': 'Guardian Alert: A meeting request was detected in your child\'s chat on Fortnite. Another player suggested "we should hang out sometime." An in-person meetup was proposed.'},
-]
-
-_MOCK_THREAT_STATS = [
-    {'display_label': 'Social Media Solicitation', 'icon': 'fa-share-alt',          'count': 312, 'pct': 100},
-    {'display_label': 'Personal Info Request',     'icon': 'fa-id-card',            'count': 247, 'pct': 79},
-    {'display_label': 'Meeting Request',           'icon': 'fa-map-marker-alt',     'count': 189, 'pct': 61},
-    {'display_label': 'Grooming Language',         'icon': 'fa-exclamation-triangle','count': 143, 'pct': 46},
-    {'display_label': 'Secrecy Request',           'icon': 'fa-user-secret',        'count':  98, 'pct': 31},
-    {'display_label': 'Photo/Video Request',       'icon': 'fa-camera',             'count':  76, 'pct': 24},
-    {'display_label': 'Threats / Bullying',        'icon': 'fa-fist-raised',        'count':  54, 'pct': 17},
-    {'display_label': 'Gift / Bribery',            'icon': 'fa-gift',               'count':  38, 'pct': 12},
-]
-
-_MOCK_PEAK_TIMES = [
-    {'label': '12am–3am', 'count':  14, 'pct':  5},
-    {'label': '3am–6am',  'count':   6, 'pct':  2},
-    {'label': '6am–9am',  'count':  19, 'pct':  6},
-    {'label': '9am–12pm', 'count':  48, 'pct': 16},
-    {'label': '12pm–3pm', 'count':  93, 'pct': 32},
-    {'label': '3pm–6pm',  'count': 178, 'pct': 61},
-    {'label': '6pm–9pm',  'count': 294, 'pct': 100},
-    {'label': '9pm–12am', 'count': 251, 'pct': 85},
-]
-
-
-@login_required(login_url='signin')
-def dashboard(request):
-    recent_games = [
-        {'name': 'Fortnite',      'last_played_str': '3 hours ago',  'total_minutes': 145},
-        {'name': 'Roblox',        'last_played_str': '1 day ago',    'total_minutes': 225},
-        {'name': 'Minecraft',     'last_played_str': '2 days ago',   'total_minutes': 170},
-        {'name': 'Valorant',      'last_played_str': '3 days ago',   'total_minutes': 110},
-        {'name': 'Rocket League', 'last_played_str': '5 days ago',   'total_minutes':  45},
-        {'name': 'FIFA 25',       'last_played_str': '6 days ago',   'total_minutes':  35},
-    ]
-    max_game_minutes = max(g['total_minutes'] for g in recent_games)
-    return render(request, 'core/dashboard.html', {
-        'children':          [type('Child', (), {'id': 1, 'name': 'Emma', 'age': 11})()],
-        'selected_child':    type('Child', (), {'id': 1, 'name': 'Emma', 'age': 11})(),
-        'alerts_24h':        1,
-        'alerts_7d':         3,
-        'sessions_7d':       14,
-        'playtime_7d':       625,
-        'recent_alerts':     _MOCK_ALERTS,
-        'recent_games':      recent_games,
-        'max_game_minutes':  max_game_minutes,
-    })
-
-
-@login_required(login_url='signin')
-def dashboard_live(request):
-    profile = request.user.profile
-    children = list(profile.children.order_by('name'))
-
-    selected_child = None
-    selected_child_id = request.GET.get('child')
-    if children:
-        if selected_child_id:
-            selected_child = next((c for c in children if str(c.id) == selected_child_id), children[0])
-        else:
-            selected_child = children[0]
-
-    now = timezone.now()
-    last_24h = now - timedelta(hours=24)
-    last_7d  = now - timedelta(days=7)
-
-    alerts_24h    = 0
-    alerts_7d     = 0
-    recent_alerts = []
-    recent_games  = []
-    sessions_7d   = 0
-    playtime_7d   = 0
-
-    if selected_child:
-        alerts_24h    = selected_child.alerts.filter(timestamp__gte=last_24h).count()
-        alerts_7d     = selected_child.alerts.filter(timestamp__gte=last_7d).count()
-        recent_alerts = selected_child.alerts.filter(timestamp__gte=last_7d).order_by('-timestamp')[:15]
-
-        all_sessions = selected_child.sessions.filter(started_at__gte=last_7d)
-        sessions_7d  = all_sessions.count()
-        playtime_7d  = sum(s.duration_minutes for s in all_sessions)
-
-        seen: dict = {}
-        for s in all_sessions.order_by('-started_at'):
-            if s.game_name not in seen:
-                seen[s.game_name] = {'last_played': s.started_at, 'total_minutes': 0}
-            seen[s.game_name]['total_minutes'] += s.duration_minutes
-        recent_games = [{'name': k, **v} for k, v in seen.items()]
-
-    threat_stats = list(CommunityThreatStat.objects.all())
-    peak_time_stats = list(CommunityPeakTimeStat.objects.all())
-
-    max_threat = max((s.count for s in threat_stats), default=1)
-    max_peak   = max((s.count for s in peak_time_stats), default=1)
-    for s in threat_stats:
-        s.pct = round(s.count / max_threat * 100)
-    for s in peak_time_stats:
-        s.pct = round(s.count / max_peak * 100)
-
-    return render(request, 'core/dashboard.html', {
-        'children':         children,
-        'selected_child':   selected_child,
-        'alerts_24h':       alerts_24h,
-        'alerts_7d':        alerts_7d,
-        'recent_alerts':    recent_alerts,
-        'recent_games':     recent_games,
-        'sessions_7d':      sessions_7d,
-        'playtime_7d':      playtime_7d,
-        'threat_stats':     threat_stats,
-        'peak_time_stats':  peak_time_stats,
-    })
 
 
 # ─── Choose / Change Plan ────────────────────────────────

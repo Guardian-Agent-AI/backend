@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import ast; ast.parse\\(open\\('webapp/core/views.py'\\).read\\(\\)\\); ast.parse\\(open\\('webapp/core/urls.py'\\).read\\(\\)\\); print\\('OK: views.py and urls.py parse cleanly'\\)\")"
+    ]
+  }
+}

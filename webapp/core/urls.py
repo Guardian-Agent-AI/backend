@@ -8,9 +8,8 @@ urlpatterns = [
     path('signup/<int:plan_id>/', views.signup_view, name='signup'),
     path('signin/', views.signin_view, name='signin'),
     path('signout/', views.signout_view, name='signout'),
-    path('dashboard/', views.dashboard, name='dashboard'),
     path('settings/', views.settings_view, name='settings'),
-    path('dashboard/plan/<int:plan_id>/', views.choose_plan, name='choose_plan'),
+    path('settings/plan/<int:plan_id>/', views.choose_plan, name='choose_plan'),
     path('install/', views.install_page, name='install'),
     path('download/<str:platform>/', views.download_app, name='download_app'),
 
