@@ -154,7 +154,9 @@
                             {% if profile.plan.id == plan.id %}
                             <span class="badge" style="background:rgba(34,211,153,0.12);color:var(--ga-success);border:1px solid rgba(34,211,153,0.2);">Current</span>
                             {% else %}
-                            <a href="{% url 'choose_plan' plan.id %}" class="btn btn-sm btn-outline-primary">Switch</a>
+                            <a href="{% url 'create_checkout_session' plan.id %}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-credit-card me-1" style="font-size:0.7rem;"></i>Subscribe
+                            </a>
                             {% endif %}
                         </div>
                     </div>
