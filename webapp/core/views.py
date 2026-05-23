@@ -8,7 +8,7 @@ from django.http import FileResponse, Http404
 from pathlib import Path
 from datetime import timedelta
 from django.utils import timezone
-from .models import Plan, UserProfile, Child, AlertEvent, CommunityThreatStat, CommunityPeakTimeStat, Device
+from .models import Plan, UserProfile, Child, Device, Incident, CommunityThreatStat, CommunityPeakTimeStat
 from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm, ChangePasswordForm, ChildForm
 
 
@@ -59,7 +59,6 @@ def signup_view(request, plan_id=None):
             profile, _ = UserProfile.objects.get_or_create(user=user)
             profile.phone_number = form.cleaned_data['phone_number']
             profile.plan = plan
-            profile.children_count = form.cleaned_data['children_count']
             profile.save()
             login(request, user)
             return redirect('install')
@@ -186,9 +185,9 @@ def dashboard_live(request):
     playtime_7d   = 0
 
     if selected_child:
-        alerts_24h    = selected_child.alerts.filter(timestamp__gte=last_24h).count()
-        alerts_7d     = selected_child.alerts.filter(timestamp__gte=last_7d).count()
-        recent_alerts = selected_child.alerts.filter(timestamp__gte=last_7d).order_by('-timestamp')[:15]
+        alerts_24h    = selected_child.incidents.filter(detected_at__gte=last_24h).count()
+        alerts_7d     = selected_child.incidents.filter(detected_at__gte=last_7d).count()
+        recent_alerts = selected_child.incidents.filter(detected_at__gte=last_7d).order_by('-detected_at')[:15]
 
         all_sessions = selected_child.sessions.filter(started_at__gte=last_7d)
         sessions_7d  = all_sessions.count()
@@ -296,7 +295,7 @@ def settings_view(request):
                 return redirect('settings')
 
     children = profile.children.order_by('name')
-    devices = profile.devices.order_by('-last_seen', 'name')
+    devices = Device.objects.filter(child__parent=profile).order_by('-last_seen_at', 'name')
 
     return render(request, 'core/settings.html', {
         'profile': profile,
