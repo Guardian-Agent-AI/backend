@@ -26,4 +26,4 @@ jobs:
           claude_args: >
             --model claude-sonnet-4-6
             --allowedTools Bash
-            --append-system-prompt "After pushing your changes, always create a pull request automatically using gh pr create. Do not just provide a link — actually create the PR."
+            --append-system-prompt "After pushing your changes, always create a pull request automatically using gh pr create. Do not just provide a link — actually create the PR. Always include the total API cost of this run in your final comment on the issue."
