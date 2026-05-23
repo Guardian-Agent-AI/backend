@@ -6,216 +6,232 @@
 {% block content %}
 <section class="dashboard-section pt-5">
     <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col">
-                <h2 class="fw-bold">Settings</h2>
-                <p class="text-muted">Manage your account, children, devices, and subscription.</p>
-            </div>
+        <div class="mb-5">
+            <h2 class="fw-bold text-white mb-1" style="letter-spacing:-0.02em;">Settings</h2>
+            <p class="text-muted small mb-0">Manage your account, children, devices, and subscription.</p>
         </div>
 
         <div class="row g-4">
-            <!-- Account Details -->
+
+            <!-- Left column -->
             <div class="col-lg-6">
-                <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Account details</h5>
 
-                        {% if account_success %}
-                        <div class="alert alert-success small py-2">Account updated.</div>
-                        {% endif %}
-
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="form_type" value="account">
-
-                            <div class="row g-3 mb-3">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">First name</label>
-                                    {{ account_form.first_name }}
-                                    {% if account_form.first_name.errors %}<div class="text-danger small mt-1">{{ account_form.first_name.errors.0 }}</div>{% endif %}
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">Last name</label>
-                                    {{ account_form.last_name }}
-                                    {% if account_form.last_name.errors %}<div class="text-danger small mt-1">{{ account_form.last_name.errors.0 }}</div>{% endif %}
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">Email</label>
-                                {{ account_form.email }}
-                                {% if account_form.email.errors %}<div class="text-danger small mt-1">{{ account_form.email.errors.0 }}</div>{% endif %}
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">Phone number</label>
-                                {{ account_form.phone_number }}
-                                {% if account_form.phone_number.errors %}<div class="text-danger small mt-1">{{ account_form.phone_number.errors.0 }}</div>{% endif %}
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100 py-2">Save changes</button>
-                        </form>
+                <!-- Account Details -->
+                <div class="settings-card mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-user" style="color:var(--ga-primary);font-size:0.75rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Account details</h5>
                     </div>
+
+                    {% if account_success %}
+                    <div class="alert alert-success small py-2 mb-3">Account updated successfully.</div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="account">
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <label class="form-label">First name</label>
+                                {{ account_form.first_name }}
+                                {% if account_form.first_name.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ account_form.first_name.errors.0 }}</div>{% endif %}
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Last name</label>
+                                {{ account_form.last_name }}
+                                {% if account_form.last_name.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ account_form.last_name.errors.0 }}</div>{% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            {{ account_form.email }}
+                            {% if account_form.email.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ account_form.email.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Phone number</label>
+                            {{ account_form.phone_number }}
+                            {% if account_form.phone_number.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ account_form.phone_number.errors.0 }}</div>{% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary px-4 py-2">Save changes</button>
+                    </form>
                 </div>
 
                 <!-- Children Management -->
-                <div class="card border-0 shadow-sm rounded-4 mt-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Children</h5>
+                <div class="settings-card">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-child" style="color:var(--ga-primary);font-size:0.75rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Children</h5>
+                    </div>
 
-                        {% if children %}
-                        <div class="list-group list-group-flush mb-3">
-                            {% for child in children %}
-                            <div class="list-group-item d-flex align-items-center px-0">
+                    {% if children %}
+                    <div class="mb-4">
+                        {% for child in children %}
+                        <div class="d-flex align-items-center py-2 {% if not forloop.last %}border-bottom{% endif %}" style="border-color:var(--ga-border)!important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div style="width:30px;height:30px;border-radius:50%;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-child" style="color:var(--ga-primary);font-size:0.65rem;"></i>
+                                </div>
                                 <div>
-                                    <i class="fas fa-child text-primary me-2"></i>
-                                    <strong class="small">{{ child.name }}</strong>
+                                    <strong class="text-white" style="font-size:0.875rem;">{{ child.name }}</strong>
                                     {% if child.age %}<span class="text-muted small ms-2">Age {{ child.age }}</span>{% endif %}
                                 </div>
-                                <div class="ms-auto">
-                                    <form method="post" class="d-inline">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="form_type" value="remove_child">
-                                        <input type="hidden" name="child_id" value="{{ child.id }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Remove {{ child.name }}?')">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </form>
-                                </div>
                             </div>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        <p class="text-muted small mb-3">No children added yet.</p>
-                        {% endif %}
-
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="form_type" value="add_child">
-                            <div class="row g-2 align-items-end">
-                                <div class="col">
-                                    <label class="form-label small mb-1">Name</label>
-                                    {{ child_form.name }}
-                                </div>
-                                <div class="col-3">
-                                    <label class="form-label small mb-1">Age</label>
-                                    {{ child_form.age }}
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i>
+                            <div class="ms-auto">
+                                <form method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="form_type" value="remove_child">
+                                    <input type="hidden" name="child_id" value="{{ child.id }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Remove {{ child.name }}?')" style="padding:0.2rem 0.5rem;">
+                                        <i class="fas fa-times" style="font-size:0.7rem;"></i>
                                     </button>
-                                </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
+                        {% endfor %}
                     </div>
+                    {% else %}
+                    <p class="text-muted small mb-4">No children added yet.</p>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="add_child">
+                        <div class="row g-2 align-items-end">
+                            <div class="col">
+                                <label class="form-label">Name</label>
+                                {{ child_form.name }}
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label">Age</label>
+                                {{ child_form.age }}
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary" style="padding:0.58rem 0.85rem;">
+                                    <i class="fas fa-plus" style="font-size:0.8rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-            <!-- Right Column -->
+            <!-- Right column -->
             <div class="col-lg-6">
-                <!-- Current Plan / Change Plan -->
-                <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Subscription</h5>
 
-                        {% if profile.plan %}
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">{{ profile.plan.name }}</span>
-                            <span class="ms-auto fw-bold">&euro;{{ profile.plan.price_monthly }}/mo</span>
+                <!-- Subscription -->
+                <div class="settings-card mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-credit-card" style="color:var(--ga-primary);font-size:0.75rem;"></i>
                         </div>
-                        {% else %}
-                        <p class="text-muted small mb-3">No active plan.</p>
-                        {% endif %}
+                        <h5 class="mb-0">Subscription</h5>
+                    </div>
 
-                        <div class="list-group list-group-flush">
-                            {% for plan in plans %}
-                            <div class="list-group-item d-flex align-items-center px-0 {% if profile.plan.id == plan.id %}bg-light{% endif %}">
-                                <div>
-                                    <strong class="small">{{ plan.name }}</strong>
-                                    <span class="text-muted small ms-2">&euro;{{ plan.price_monthly }}/mo</span>
-                                </div>
-                                <div class="ms-auto">
-                                    {% if profile.plan.id == plan.id %}
-                                    <span class="badge bg-success">Current</span>
-                                    {% else %}
-                                    <a href="{% url 'choose_plan' plan.id %}" class="btn btn-sm btn-outline-primary">Switch</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endfor %}
+                    {% if profile.plan %}
+                    <div class="d-flex align-items-center mb-4 p-3 rounded-2" style="background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.12);">
+                        <div>
+                            <span class="text-white fw-semibold small">{{ profile.plan.name }}</span>
+                            <span class="text-muted small ms-2">Active plan</span>
+                        </div>
+                        <span class="ms-auto fw-bold text-white">&euro;{{ profile.plan.price_monthly }}/mo</span>
+                    </div>
+                    {% else %}
+                    <p class="text-muted small mb-4">No active plan.</p>
+                    {% endif %}
+
+                    {% for plan in plans %}
+                    <div class="d-flex align-items-center py-2 {% if not forloop.last %}border-bottom{% endif %}" style="border-color:var(--ga-border)!important;">
+                        <div>
+                            <strong class="text-white" style="font-size:0.875rem;">{{ plan.name }}</strong>
+                            <span class="text-muted small ms-2">&euro;{{ plan.price_monthly }}/mo</span>
+                        </div>
+                        <div class="ms-auto">
+                            {% if profile.plan.id == plan.id %}
+                            <span class="badge" style="background:rgba(34,211,153,0.12);color:var(--ga-success);border:1px solid rgba(34,211,153,0.2);">Current</span>
+                            {% else %}
+                            <a href="{% url 'choose_plan' plan.id %}" class="btn btn-sm btn-outline-primary">Switch</a>
+                            {% endif %}
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
 
                 <!-- Devices -->
-                <div class="card border-0 shadow-sm rounded-4 mt-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Devices</h5>
-                        {% if profile.plan %}
-                        <p class="text-muted small mb-3">
-                            {{ devices|length }} of {{ profile.plan.max_devices }} device{{ profile.plan.max_devices|pluralize }} registered.
-                        </p>
-                        {% endif %}
-
-                        {% if devices %}
-                        <div class="list-group list-group-flush">
-                            {% for device in devices %}
-                            <div class="list-group-item d-flex align-items-center px-0">
-                                <div>
-                                    <i class="fas fa-{% if device.device_type == 'pc' %}desktop{% elif device.device_type == 'console' %}gamepad{% elif device.device_type == 'mobile' %}mobile-alt{% else %}laptop{% endif %} text-primary me-2"></i>
-                                    <strong class="small">{{ device.name }}</strong>
-                                    {% if device.child %}<span class="text-muted small ms-2">({{ device.child.name }})</span>{% endif %}
-                                </div>
-                                <div class="ms-auto">
-                                    {% if device.is_active %}
-                                    <span class="badge bg-success-subtle text-success">Active</span>
-                                    {% else %}
-                                    <span class="badge bg-secondary-subtle text-secondary">Offline</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endfor %}
+                <div class="settings-card mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-desktop" style="color:var(--ga-primary);font-size:0.75rem;"></i>
                         </div>
-                        {% else %}
-                        <p class="text-muted small mb-0">No devices registered yet. Install Guardian Agent on your child's device to get started.</p>
+                        <h5 class="mb-0">Devices</h5>
+                        {% if profile.plan %}
+                        <span class="ms-auto text-muted small">{{ devices|length }} / {{ profile.plan.max_devices }}</span>
                         {% endif %}
                     </div>
+
+                    {% if devices %}
+                    {% for device in devices %}
+                    <div class="d-flex align-items-center py-2 {% if not forloop.last %}border-bottom{% endif %}" style="border-color:var(--ga-border)!important;">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-{% if device.device_type == 'pc' %}desktop{% elif device.device_type == 'console' %}gamepad{% elif device.device_type == 'mobile' %}mobile-alt{% else %}laptop{% endif %} text-muted" style="font-size:0.85rem;"></i>
+                            <div>
+                                <strong class="text-white" style="font-size:0.875rem;">{{ device.name }}</strong>
+                                {% if device.child %}<span class="text-muted small ms-2">({{ device.child.name }})</span>{% endif %}
+                            </div>
+                        </div>
+                        <div class="ms-auto">
+                            {% if device.is_active %}
+                            <span class="badge" style="background:rgba(34,211,153,0.1);color:var(--ga-success);border:1px solid rgba(34,211,153,0.15);">Active</span>
+                            {% else %}
+                            <span class="badge" style="background:rgba(100,116,139,0.1);color:var(--ga-muted);border:1px solid rgba(100,116,139,0.15);">Offline</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted small mb-0">No devices registered yet. Install Guardian Agent on your child's device to get started.</p>
+                    {% endif %}
                 </div>
 
                 <!-- Change Password -->
-                <div class="card border-0 shadow-sm rounded-4 mt-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Change password</h5>
-
-                        {% if password_success %}
-                        <div class="alert alert-success small py-2">Password updated.</div>
-                        {% endif %}
-
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="form_type" value="password">
-
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">Current password</label>
-                                {{ password_form.current_password }}
-                                {% if password_form.current_password.errors %}<div class="text-danger small mt-1">{{ password_form.current_password.errors.0 }}</div>{% endif %}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">New password</label>
-                                {{ password_form.new_password }}
-                                {% if password_form.new_password.errors %}<div class="text-danger small mt-1">{{ password_form.new_password.errors.0 }}</div>{% endif %}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">Confirm new password</label>
-                                {{ password_form.new_password_confirm }}
-                                {% if password_form.new_password_confirm.errors %}<div class="text-danger small mt-1">{{ password_form.new_password_confirm.errors.0 }}</div>{% endif %}
-                            </div>
-
-                            <button type="submit" class="btn btn-outline-primary w-100 py-2">Update password</button>
-                        </form>
+                <div class="settings-card">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-lock" style="color:var(--ga-primary);font-size:0.75rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Change password</h5>
                     </div>
+
+                    {% if password_success %}
+                    <div class="alert alert-success small py-2 mb-3">Password updated successfully.</div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="password">
+                        <div class="mb-3">
+                            <label class="form-label">Current password</label>
+                            {{ password_form.current_password }}
+                            {% if password_form.current_password.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ password_form.current_password.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">New password</label>
+                            {{ password_form.new_password }}
+                            {% if password_form.new_password.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ password_form.new_password.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Confirm new password</label>
+                            {{ password_form.new_password_confirm }}
+                            {% if password_form.new_password_confirm.errors %}<div class="text-danger mt-1" style="font-size:0.78rem;">{{ password_form.new_password_confirm.errors.0 }}</div>{% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary px-4 py-2">Update password</button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
