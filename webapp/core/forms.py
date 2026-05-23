@@ -23,9 +23,6 @@ class RegistrationForm(forms.Form):
     password_confirm = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder': 'Repeat password',
     }))
-    children_count = forms.IntegerField(min_value=1, max_value=10, initial=1, widget=forms.NumberInput(attrs={
-        'class': 'form-control', 'min': 1, 'max': 10,
-    }))
 
     def clean_email(self):
         email = self.cleaned_data['email']

@@ -83,7 +83,7 @@ def _profile_json(user):
         'first_name': user.first_name,
         'last_name': user.last_name,
         'phone_number': profile.phone_number if profile else '',
-        'children_count': profile.children_count if profile else 0,
+        'children_count': profile.children.count() if profile else 0,
         'signed_up_at': profile.signed_up_at.isoformat() if profile else None,
         'plan': None,
     }
