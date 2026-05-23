@@ -1,7 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -c \"import ast; ast.parse\\(open\\('webapp/core/views.py'\\).read\\(\\)\\); ast.parse\\(open\\('webapp/core/urls.py'\\).read\\(\\)\\); print\\('OK: views.py and urls.py parse cleanly'\\)\")"
+      "Bash(python -c \"import ast; ast.parse\\(open\\('webapp/core/views.py'\\).read\\(\\)\\); ast.parse\\(open\\('webapp/core/urls.py'\\).read\\(\\)\\); print\\('OK: views.py and urls.py parse cleanly'\\)\")",
+      "PowerShell(\\(Get-Command stripe -ErrorAction SilentlyContinue\\).Source; if \\(-not $?\\) { Write-Output \"NOT INSTALLED\" })",
+      "PowerShell($cmd = Get-Command stripe -ErrorAction SilentlyContinue; if \\($cmd\\) { Write-Output \"INSTALLED: $\\($cmd.Source\\)\" } else { Write-Output \"NOT INSTALLED\" }; Write-Output \"---\"; $scoop = Get-Command scoop -ErrorAction SilentlyContinue; $winget = Get-Command winget -ErrorAction SilentlyContinue; Write-Output \"scoop: $\\(if \\($scoop\\) { 'available' } else { 'not available' }\\)\"; Write-Output \"winget: $\\(if \\($winget\\) { 'available' } else { 'not available' }\\)\")",
+      "PowerShell(winget install --id Stripe.StripeCLI --accept-source-agreements --accept-package-agreements --silent)",
+      "PowerShell(& \"C:\\\\Users\\\\marom\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Stripe.StripeCli_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\stripe.exe\" --version)",
+      "PowerShell(& \"C:\\\\Users\\\\marom\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Stripe.StripeCli_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\stripe.exe\" login)",
+      "PowerShell($envFile = Get-Content \"d:\\\\Guardian_Agent\\\\backend\\\\.env\"; $secretLine = $envFile | Where-Object { $_ -match '^STRIPE_SECRET_KEY=' }; $apiKey = $secretLine -replace '^STRIPE_SECRET_KEY=', ''; Write-Output \"Got API key: $\\($apiKey.Substring\\(0,12\\)\\)...\"; & \"C:\\\\Users\\\\marom\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Stripe.StripeCli_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\stripe.exe\" listen --api-key $apiKey --forward-to localhost:8000/payments/webhooks/stripe/)",
+      "PowerShell($env:COMPOSE_BAKE = \"false\"; docker compose ps)",
+      "PowerShell($env:COMPOSE_BAKE = \"false\"; docker compose up -d --force-recreate web 2>&1 | Select-Object -Last 10)",
+      "PowerShell(docker compose logs web --tail 15)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('webapp/core/views.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "PowerShell(docker compose exec web python manage.py makemigrations core 2>&1)",
+      "PowerShell(docker compose exec web python manage.py migrate core 2>&1)",
+      "PowerShell(docker compose exec web python manage.py sync_stripe_prices 2>&1)",
+      "PowerShell(docker compose logs web --tail 10)",
+      "PowerShell(docker compose logs web --tail 6)"
     ]
   }
 }

@@ -6,12 +6,17 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings as django_settings
 from django.http import FileResponse, Http404
 from pathlib import Path
-from .models import Plan, UserProfile, Child, Device
+from datetime import timedelta
+from django.utils import timezone
+from .models import Plan, UserProfile, Child, Device, Incident, CommunityThreatStat, CommunityPeakTimeStat
 from .forms import RegistrationForm, LoginForm, ContactForm, AccountSettingsForm, ChangePasswordForm, ChildForm
 
 
 # ─── Landing ──────────────────────────────────────────────
 def landing(request):
+    if request.user.is_authenticated and request.method == 'GET':
+        return redirect('dashboard')
+
     plans = Plan.objects.filter(is_active=True).order_by('price_monthly')
     contact_form = ContactForm()
 
@@ -57,7 +62,6 @@ def signup_view(request, plan_id=None):
             profile, _ = UserProfile.objects.get_or_create(user=user)
             profile.phone_number = form.cleaned_data['phone_number']
             profile.plan = plan
-            profile.children_count = form.cleaned_data['children_count']
             profile.save()
             login(request, user)
             return redirect('install')
@@ -103,6 +107,77 @@ def signout_view(request):
     logout(request)
     messages.success(request, 'You have been signed out.')
     return redirect('landing')
+
+
+# ─── Dashboard (minimal welcome) ──────────────────────────
+@login_required(login_url='signin')
+def dashboard(request):
+    return render(request, 'core/dashboard.html')
+
+
+@login_required(login_url='signin')
+def dashboard_live(request):
+    profile = request.user.profile
+    children = list(profile.children.order_by('name'))
+
+    selected_child = None
+    selected_child_id = request.GET.get('child')
+    if children:
+        if selected_child_id:
+            selected_child = next((c for c in children if str(c.id) == selected_child_id), children[0])
+        else:
+            selected_child = children[0]
+
+    now = timezone.now()
+    last_24h = now - timedelta(hours=24)
+    last_7d  = now - timedelta(days=7)
+
+    alerts_24h    = 0
+    alerts_7d     = 0
+    recent_alerts = []
+    recent_games  = []
+    sessions_7d   = 0
+    playtime_7d   = 0
+
+    if selected_child:
+        alerts_24h    = selected_child.incidents.filter(detected_at__gte=last_24h).count()
+        alerts_7d     = selected_child.incidents.filter(detected_at__gte=last_7d).count()
+        recent_alerts = selected_child.incidents.filter(detected_at__gte=last_7d).order_by('-detected_at')[:15]
+
+        all_sessions = selected_child.sessions.filter(started_at__gte=last_7d)
+        sessions_7d  = all_sessions.count()
+        playtime_7d  = sum(s.duration_minutes for s in all_sessions)
+
+        seen: dict = {}
+        for s in all_sessions.order_by('-started_at'):
+            if s.game_name not in seen:
+                seen[s.game_name] = {'last_played': s.started_at, 'total_minutes': 0}
+            seen[s.game_name]['total_minutes'] += s.duration_minutes
+        recent_games = [{'name': k, **v} for k, v in seen.items()]
+
+    threat_stats = list(CommunityThreatStat.objects.all())
+    peak_time_stats = list(CommunityPeakTimeStat.objects.all())
+
+    max_threat = max((s.count for s in threat_stats), default=1)
+    max_peak   = max((s.count for s in peak_time_stats), default=1)
+    for s in threat_stats:
+        s.pct = round(s.count / max_threat * 100)
+    for s in peak_time_stats:
+        s.pct = round(s.count / max_peak * 100)
+
+    return render(request, 'core/dashboard.html', {
+        'children':         children,
+        'selected_child':   selected_child,
+        'alerts_24h':       alerts_24h,
+        'alerts_7d':        alerts_7d,
+        'recent_alerts':    recent_alerts,
+        'recent_games':     recent_games,
+        'sessions_7d':      sessions_7d,
+        'playtime_7d':      playtime_7d,
+        'threat_stats':     threat_stats,
+        'peak_time_stats':  peak_time_stats,
+    })
+
 
 
 # ─── Choose / Change Plan ────────────────────────────────
@@ -176,7 +251,7 @@ def settings_view(request):
                 return redirect('settings')
 
     children = profile.children.order_by('name')
-    devices = profile.devices.order_by('-last_seen', 'name')
+    devices = Device.objects.filter(child__parent=profile).order_by('-last_seen_at', 'name')
 
     return render(request, 'core/settings.html', {
         'profile': profile,
