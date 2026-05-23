@@ -26,12 +26,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center gap-1">
-                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#features">Features</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#how-it-works">How It Works</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#pricing">Pricing</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#contact">Contact</a></li>
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li class="nav-item me-2">
+                    <span class="badge d-inline-flex align-items-center gap-1" style="background:rgba(56,189,248,0.1);color:var(--ga-primary);border:1px solid rgba(56,189,248,0.2);padding:0.4rem 0.7rem;font-weight:500;">
+                        <i class="fas fa-crown" style="font-size:0.65rem;"></i>{% if user.profile.plan %}{{ user.profile.plan.name }}{% else %}No plan{% endif %}
+                    </span>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'install' %}">Install</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'settings' %}">Settings</a></li>
                 <li class="nav-item ms-2">
@@ -40,6 +40,10 @@
                     </a>
                 </li>
                 {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#how-it-works">How It Works</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#pricing">Pricing</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}#contact">Contact</a></li>
                 <li class="nav-item ms-2">
                     <a class="btn btn-outline-light btn-sm px-3" href="{% url 'signin' %}">Sign In</a>
                 </li>
